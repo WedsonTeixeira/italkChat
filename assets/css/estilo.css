@@ -2,12 +2,11 @@
     padding: 0px;
     margin: 0px
 }
-
 #cabecalho {
     height: 100px;
     background: rgb(4, 14, 109)
 }
-
+body{height: 100%;}
 #logo {
     margin-left: 150px;
     padding: 20px;
@@ -23,6 +22,7 @@
     margin-top: 45px;
     float: right;
     margin-right: 150px;
+    
 }
 
 .link {
@@ -38,17 +38,36 @@
 .link:hover {
     background: #fff;
     color: rgb(4, 14, 109);
-    border-radius: 2px 2px 2px 2px;
+    border-radius: 4px 4px 4px 4px;
 }
 
 #tela-login {
-    border:1px solid;
+
     padding: 40px;
     float: right;
     margin-right: 150px;
     margin-top: 50px;
+    box-shadow:2px 3px 18px #000;
+    opacity: 0.9;
 }
-
+#conteudo-boas-vindas img{
+    width: 500px;
+    height: 200px;
+    float: left;
+    margin:100px;
+}
+#tela-login a{
+    display: block;
+    margin-top: 10px;
+    color:rgb(12, 12, 17);
+    text-decoration: none}
+label {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgb(49, 14, 87)
+}
 input {
     width: 280px;
     height: 50px;
@@ -59,9 +78,24 @@ input {
     border-radius: 2px 2px 2px;
 }
 
+button{border:none;}
 .btn-success{
-
+    width: 80px;
+    height: 40px;
+    background-color: rgb(25, 55, 185);
+    color:#fff;
+    font-size: 20px;
+    cursor: pointer;
 }   
+.btn-erro{
+    width: 80px;
+    height: 40px;
+    background-color: rgb(145, 44, 44);
+    color:#fff;
+    font-size: 20px;
+    cursor: pointer;
+}   
+
 
 input:focus {
     border: 2px solid rgb(49, 14, 87);
@@ -79,11 +113,7 @@ input:focus {
     padding: 4px
 }
 
-label {
-    display: block;
-    font-size: 18px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
+
 
 input::placeholder {
     color: rgb(49, 14, 87);
@@ -138,13 +168,13 @@ input::placeholder {
 }
 
 footer {
-    bottom: 0;
-    position: absolute;
+    float: left;
+    position: relative;
     background: rgb(102, 101, 102);
+    margin-top:50px;
     width: 100%;
-    height: 100px;
+    height: 180px;
     color: rgb(216, 213, 224);
-    text-align: center;
 }
 
 footer div h4 {
