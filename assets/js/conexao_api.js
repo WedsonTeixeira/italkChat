@@ -1,3 +1,4 @@
+alert("ok")
 var Pessoa =  {
     nome:"",
     email:"",
@@ -7,9 +8,25 @@ var Pessoa =  {
 
 };
 
+var baseUrlChat = "http://chatjs.gitedu.com.br/";
 
-function getUserUser(codigo){
+getUser(201700087086);
 
+function getUser(codigo){
+
+    $.ajax(
+        {
+            url:"http://chatjs.gitedu.com.br/",
+            type:"POST",
+            data: "usuario/get-all-users?".codigo,
+            success:function(msg){
+                alert("Data : "+msg);
+            }
+
+        }
+        
+
+    );
 
 }
 function getUserByName(codigo, id){
