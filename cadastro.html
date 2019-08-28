@@ -1,59 +1,90 @@
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <title>Italk - Home</title>
-        <link rel="stylesheet"  href="assets/css/estiloca.css" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-        
-    </head>
-    <body>
-        <!-- barra de navegação -->
-        <header id="cabecalho"> 
-                <span id="logo">ITALK</span>
-            <nav id="barra-navegacao">
-                <a class="link" href="index.html">INICIO</a></li>
-                <a class="link" href="#">CADASTRE-SE</a>
-                <a class="link" href="#">QUEM SOMOS</a>
-            </nav>
-        </header>
-        <main>
-            <div id="conteudo">
 
-            </div>
-            <div id="tela-cadastro">
-                <div>
-                    <label fo="nome">NOME</label>
-                    <input type="text" id="nome" placeholder="Informe seu  Nome">
-                </div>
-                <div>
-                    <label for="sobrenome">SOBRENOME</label>
-                    <input type="text" id="sobrenome" placeholder="Informe seu Sobrenome">  
-                </div>
-                <div>
-                    <label for="email">EMAIL</label>
-                    <input type="text" id="email" placeholder="Informe seu email">  
-                </div>
-                <div>
-                    <label for="senha">SENHA</label>
-                    <input type="password" id="senha" placeholder="Informe sua Senha">  
-                </div>
-                <div>
-                    <label for="consenha">SENHA</label>
-                    <input type="password" id="consenha" placeholder="Informe sua Senha Novamente">  
-                </div>
-                <div>
-                    <label for="sexo">SEXO</label>
-                    <input name="sexo" type="radio" id="sexo" >Masculino
-                    <input name="sexo" type="radio" id="sexo" >Feminino  
-                </div>
+<head>
+    <meta charset="utf-8">
+    <title>Italk - Cadastro</title>
+    <link rel="stylesheet" href="assets/css/estilo.css" type="text/css">
+    <link rel="stylesheet" href="assets/coreui-free-bootstrap-admin-template-master/css/style.min.css">
 
-                <button id="btn-buscar">Entrar</button>
-                <button>Limpar  </button>
+
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/@coreui/icons/css/coreui-icons.min.css">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- barra de navegação -->
+    <header id="cabecalho">
+            <a  href="index.html"> <span id="logo">iTALK</span></a>
+        <nav id="barra-navegacao">
+            <a class="link" href="index.html">INICIO</a></li>
+            <a class="link" href="cadastro.html">CADASTRE-SE</a>
+        </nav>
+    </header>
+    <main class="col-md-12">
+        <div class="row tela-cadastro centro">
+            <div class="col-md-8">
+                <div class="card" id="ui-view">
+                    <div>
+                        <div class="card-header">
+                            <i class="icon-note"></i>Formulário de Cadastro
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="center">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label fo="nome">NOME</label>
+                                        <input type="text" id="nome" placeholder="Informe seu  Nome" autofocus required>
+                                    </div>
+                                    <div>
+                                        <label for="email">EMAIL</label>
+                                        <input type="email" id="email" placeholder="Informe seu email" required>
+                                    </div>
+                                    <div>
+                                        <label for="senha">SENHA</label>
+                                        <input type="password" id="senha" placeholder="Informe sua Senha" required>
+                                    </div>
+                                    <div>
+                                        <label for="consenha">SENHA</label>
+                                        <input type="password" id="consenha" placeholder="Informe sua Senha Novamente" required>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <label fo="nome">LOGIN</label>
+                                        <input type="text" id="login" placeholder="Informe seu Login" required>
+                                    </div>
+                                    <div>
+                                        <label for="email">Data de Nascimento</label>
+                                        <input type="date" id="data-nasc" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="btn-cadastrar" class="btn-success">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </main>
-        <footer>
-   
-        </footer>
-        <script src="assets/js/lib.js"></script>
-    </body>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="assets/js/lib.js"></script>
+    <script src="assets/js/jquery.js"></script>
+</body>
+
 </html>

@@ -1,47 +1,74 @@
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <title>Italk - Home</title>
-        <link rel="stylesheet"  href="assets/css/estilo.css" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-        
-    </head>
-    <body>
-        <!-- barra de navegação -->
-        <header id="cabecalho"> 
-                <span id="logo">ITALK</span>
-                <span>Facilidade na hora de se comunicar</span>
-            <nav id="barra-navegacao">
-                <a class="link" href="index.html">INICIO</a></li>
-                <a class="link" href="cadastro.html">CADASTRE-SE</a>
-                <a class="link" href="#">QUEM SOMOS</a>
-            </nav>
-        </header>
-        <main>
-            <div id="conteudo-boas-vindas">
-                <img src="img/82-824287_live-chat-live-chat-logo-png.jpg">
+
+<head>
+    <meta charset="utf-8">
+    <title>Italk - Home</title>
+    <link rel="stylesheet" href="assets/css/estilo.css" type="text/css">
+    <link rel="stylesheet" href="assets/coreui-free-bootstrap-admin-template-master/css/style.min.css">
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="assets/coreui-free-bootstrap-admin-template-master/vendors/@coreui/icons/css/coreui-icons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- barra de navegação -->
+    <header id="cabecalho">
+        <a  href="index.html"> <span id="logo">iTALK</span></a>
+        <nav id="barra-navegacao">
+            <a class="link" href="index.html">INICIO</a></li>
+            <a class="link" href="cadastro.html">CADASTRE-SE</a>
+        </nav>
+    </header>
+    <main>
+        <div id="conteudo-boas-vindas">
+            <img src="img/logo.jfif">
+        </div>
+        <div id="tela-login">
+            <div id="head-login">
+                <p id="logo-login">iTALK</p>
+                <span id="subtitulo-login">Entre com sua conta</span>
             </div>
-            <div id="tela-login">
-                <div>
-                    <label fo="login">LOGIN</label>
-                    <i class="icons font-2xl d-block mt-5 cui-user"></i>
-                    <input type="text" id="login" placeholder="Informe seu login">
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icons font-2xl cui-user"></i>
+                        </span>
+                    </div>
+                    <input id="nome" class="form-control" type="text" placeholder="Nome do usuário">
                 </div>
                 <div>
-                    <label for="senha">SENHA</label>
-                    <input type="password" id="senha" placeholder="Sua senha">  
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-lock icons font-2xl"></i>
+                            </span>
+                        </div>
+                        <input id="senha" class="form-control" type="password" placeholder="Senha do usuário">
+                    </div>
                 </div>
-                <button class="btn-success">Entrar</button>
-                <button class="btn-erro">Limpar  </button>
-                <span ><a href="#"">Não possui um cadastro? Clique aqui</a></span>
             </div>
-            
-        </main>
-        <main>
-  
-        <footer>
-   
-        </footer>
-        <script src="assets/js/lib.js"></script>
-    </body>
+            <div id="footer-login">
+                <div class="div-footer">
+                    <button class="btn-success" id="btn-entrar">Entrar</button>
+                </div>
+                <div class="div-footer">
+                    <span id="link-cadastro"><a href="cadastro.html">Novo no ITalk? Clique aqui para cadastrar</a></span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+
+    <script src="assets/js/login.js"></script>
+    <script src="assets/js/jquery.js"></script>
+</body>
+
 </html>

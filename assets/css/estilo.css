@@ -2,123 +2,156 @@
     padding: 0px;
     margin: 0px
 }
+
 #cabecalho {
     height: 100px;
-    background: rgb(4, 14, 109)
+    background: rgb(56, 65, 153)
 }
-body{height: 100%;}
+
+body {
+    height: 100%;
+    font-family: 'Livvic', sans-serif;
+    background-color: rgba(204, 204, 204, 0.932);
+    color: #000
+}
+
 #logo {
-    margin-left: 150px;
+    margin-left: 100px;
     padding: 20px;
     font-size: 50px;
     color: #fff;
-    font-family: 'Fjalla One', sans-serif;
     display: inline-block;
     font-stretch: normal;
     cursor: pointer;
 }
 
 #barra-navegacao {
-    margin-top: 45px;
+    margin-top: 35px;
     float: right;
-    margin-right: 150px;
-    
+    margin-right: 120px;
+
 }
 
-.link {
-    font-family: 'Open Sans Condensed', sans-serif;
+#barra-navegacao .link {
     color: #fff;
     text-decoration: none;
-    font-size: 25px;
-    margin-right: 40px;
+    font-size: 20px;
+    margin-right: 20px;
     padding: 10px;
     font-stretch: 700;
 }
 
-.link:hover {
-    background: #fff;
-    color: rgb(4, 14, 109);
+#barra-navegacao .link:hover {
+    border: 1px solid rgb(204, 198, 186);
     border-radius: 4px 4px 4px 4px;
 }
 
-#tela-login {
+hr {
+    margin-bottom: 15px;
+}
 
-    padding: 40px;
+#tela-login {
+    background: #fff;
+    padding: 5px 45px 35px 45px;
     float: right;
     margin-right: 150px;
     margin-top: 50px;
-    box-shadow:2px 3px 18px #000;
     opacity: 0.9;
 }
-#conteudo-boas-vindas img{
-    width: 500px;
-    height: 200px;
-    float: left;
-    margin:100px;
+
+#logo-login {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    text-align: left;
+    top: 0;
+    font-size: 40px;
+    color: #000;
+    display: inline-block;
+    font-stretch: normal;
+    cursor: pointer;
 }
-#tela-login a{
+
+#subtitulo-login {
+    font-size: 20px;
+
+}
+
+#head-login {
+    margin-bottom: 15px;
+}
+
+#conteudo-boas-vindas img {
+    width: 400px;
+    height: 400px;
+    float: left;
+    margin: 50px;
+    margin-left: 100px;
+
+}
+
+#tela-login a {
     display: block;
     margin-top: 10px;
-    color:rgb(12, 12, 17);
-    text-decoration: none}
-label {
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color:rgb(49, 14, 87)
+    color: rgb(12, 12, 17);
+    text-decoration: none
 }
-input {
-    width: 280px;
+
+
+
+button {
+    border: none;
+
+}
+.btn-success {
+    padding:9px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 3px 3px 3px;
+    position: relative;
+    float: left;
+}
+#btn-cadastrar{
+    margin-top:20px;
+}
+#footer-login {
+    display: flex;
+    flex-direction: column
+}
+
+#link-cadastro a {
+    color: rgb(10, 12, 131);
+    margin-top: 20px
+}
+
+#tela-login input {
+    border: none,  !important;
+    width: 315px;
     height: 50px;
     padding: 10px;
-    margin-top: 14px;
-    margin-bottom: 20px;
     border: 1px solid;
     border-radius: 2px 2px 2px;
+    font-size: 20px;
+    outline: 0,  !important;
 }
 
-button{border:none;}
-.btn-success{
-    width: 80px;
-    height: 40px;
-    background-color: rgb(25, 55, 185);
-    color:#fff;
-    font-size: 20px;
-    cursor: pointer;
-}   
-.btn-erro{
-    width: 80px;
-    height: 40px;
-    background-color: rgb(145, 44, 44);
-    color:#fff;
-    font-size: 20px;
-    cursor: pointer;
-}   
-
+.div-input {
+    border: 1px solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 input:focus {
-    border: 2px solid rgb(49, 14, 87);
-    box-shadow: 1px 1px 5px #000
+    border: 1px solid rgb(49, 14, 87);
+    box-shadow: 1px 1px 5px #000;
 }
-
-#input-rota {
-    width: 700px;
-    margin-left: 28%;
-    margin-top: 10px;
-}
-
-.campo-rota {
-    display: inline-block;
-    padding: 4px
-}
-
 
 
 input::placeholder {
     color: rgb(49, 14, 87);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 18px
+    font-size: 16px;
 }
 
 .aviso {
@@ -126,52 +159,42 @@ input::placeholder {
     display: block
 }
 
-.color-sucesso {
-    color: green
+
+/*===============  tela cadastro ==================*/
+.centro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center
 }
 
-;
-
-.color-erro {
-    color: red
-}
-
-#btn-buscar-rota {
-    width: 150px;
-    height: 50px;
-    background: rgb(9, 60, 156);
-    border: none;
-    border-radius: 2px 2px 2px;
-    color: cornsilk;
+.tela-cadastro label {
+    display: flex;
+    flex-direction: row;
     font-size: 15px;
-    cursor: pointer;
-    padding: 3px;
-
+    margin-top:15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-
-
-#btn-buscar-rota:hover {
-    background-color: rgb(6, 39, 102);
-}
-
-#conteudo-rotas {
-    visibility: hidden;
+.tela-cadastro {
     margin-top: 2%;
-    margin-left: 24%;
-    box-sizing: border-box;
-    width: 800px;
-    height: 100px;
+}
+
+input {
+    border: none,  !important;
+    width: 315px;
+    height: 50px;
+    padding: 10px;
     border: 1px solid;
-    color: rgb(49, 14, 87);
-    font-size: 12px;
+    border-radius: 2px 2px 2px;
+    font-size: 20px;
+    outline: 0,  !important;
 }
 
 footer {
     float: left;
     position: relative;
     background: rgb(102, 101, 102);
-    margin-top:50px;
+    margin-top: 50px;
     width: 100%;
     height: 180px;
     color: rgb(216, 213, 224);
