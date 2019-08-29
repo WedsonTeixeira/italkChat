@@ -206,3 +206,33 @@ footer div h4 {
     font-weight: 7 00px;
     padding: 15px
 }
+#LadoEsquerdo{
+    width: 30%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: rgb(56, 65, 153);
+    float: left; 
+}
+#LadoDireito {
+    width: 70%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    float: left; 
+} 
+#FundoTelaLogin
+{
+    margin-top: 20px;
+    width: 100%;
+    height: 75%;
+}
+#BotaoPes
+{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#CorA
+{
+    text-align: center;
+    color: #fff;
+}
