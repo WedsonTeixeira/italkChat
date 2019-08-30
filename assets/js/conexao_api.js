@@ -1,4 +1,6 @@
 
+//const matricula_base  = 201700008538;
+const matricula_base = 201700087086;
 var Pessoa =  {
     nome:"",
     email:"",
@@ -8,32 +10,50 @@ var Pessoa =  {
 
 };
 
-getUser(201700087086);
-
 function getUser(c){
-    
+    let data;
     $.ajax({
         method: 'GET',
         url: "http://chatjs.gitedu.com.br/usuario/get-all-users?",
         data: {codigo:c},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        async:false,
         crossDomain: true,
-
         success : function(resp) {
             console.log("Sucesso: ");
-            console.log(resp);
+            data = resp;
+
         },
         error: function (resp) {
             console.log("Erro :");
-            console.log(resp);
+            return -1;
         }          
     });
 
+    console.log(data);
+    return data;
 }
-function getUserByName(codigo, id){
-
-
+function getUserByName(nome){
+    let dados;
+        $.ajax({
+            method: 'GET',
+            url: "http://chatjs.gitedu.com.br/usuario/get-user-by-name?",
+            data: {codigo:matricula_base,nome:nome},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async:false,
+            crossDomain: true,
+            success : function(resp) {
+                console.log("Sucesso: ");
+                dados=resp;
+            },  
+            error: function (resp) {
+                console .log("Erro :");
+                dados=resp;
+            }          
+        });
+        return dados;
 }
 function getAllUser(codigo, nome){
 
