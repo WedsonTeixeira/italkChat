@@ -1,0 +1,18 @@
+		TAREFAS
+-> Validar usuario -  login
+-> Pesquisar amigos
+-> Cadastro de usuario
+-> Adicionar amigos
+-> Enviar/receber mensagem
+-> Listar amigos
+
+		EM ANDAMENTO
+
+
+
+
+
+
+
+
+		CONCLUIDOS

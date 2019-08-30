@@ -38,7 +38,7 @@ body {
     font-size: 20px;
     margin-right: 20px;
     padding: 10px;
-    font-stretch: 700;
+    box-sizing: border-box;
 }
 
 #barra-navegacao .link:hover {

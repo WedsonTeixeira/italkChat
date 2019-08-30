@@ -13,9 +13,8 @@ getUser(201700087086);
 function getUser(c){
     
     $.ajax({
-        
         method: 'GET',
-        url: "http://chatjs.gitedu.com.br/usuario/get-all-users",
+        url: "http://chatjs.gitedu.com.br/usuario/get-all-users?",
         data: {codigo:c},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
