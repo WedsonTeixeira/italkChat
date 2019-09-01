@@ -1,16 +1,16 @@
 		TAREFAS
--> Validar usuario -  login
+
 -> Pesquisar amigos
--> Cadastro de usuario
 -> Adicionar amigos
 -> Enviar/receber mensagem
 -> Listar amigos
 
 		EM ANDAMENTO
 
+Luiz  : -> Validar usuario -  login
+wedson: -> Cadastro de usuario
 
-
-
+		CONCLUIDOS
 
 
 
