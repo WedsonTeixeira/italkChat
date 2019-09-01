@@ -64,8 +64,31 @@ function getAllUser(codigo) {
     });
     return dados;
 }
-function addUser(codigo, nome, data_nasc, email, usuario, senha) {
-
+function addUser(nome, data_nasc, email, usuario, senha) {
+    let dados;
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/usuario/add-user?",
+        data: {
+            codigo: matricula_base,
+            nome: nome,
+            data_nasc: data_nasc,
+            email: email,
+            usuario: usuario,
+            senha: senha,
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+        async:false,
+        success: function (data) {
+           dados = data;
+        },
+        error: function (resp) {
+            dados = data;
+        }
+    });
+    return dados;
 }
 
 function getAllFriends(codigo, usuario_id) {

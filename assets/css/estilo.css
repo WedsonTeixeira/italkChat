@@ -176,7 +176,7 @@ input::placeholder {
 }
 
 .tela-cadastro {
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 input {
@@ -239,14 +239,23 @@ footer div h4 {
 
 .avisos-error
 {
+    width: 970px;
+    margin-top: 1%;
+    background-color: red;
     text-align: center;
-    color: red;
+    color: white;
 }
 
 #avisos
 {
-    margin-top: 2%;
-    width: 65%;
-    background-color: #fff;
-    display: none;
+    align-items: right;
+}
+
+.avisos-Sucess
+{
+    width: 970px;
+    margin-top: 1%;
+    background-color: green;
+    text-align: center;
+    color: white;
 }
