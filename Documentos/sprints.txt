@@ -7,7 +7,7 @@
 
 		EM ANDAMENTO
 
-Luiz  : -> Validar usuario -  login
+Luiz  : -> Painel de controle do usuario
 wedson: -> Cadastro de usuario
 
 		CONCLUIDOS
@@ -16,3 +16,4 @@ wedson: -> Cadastro de usuario
 
 
 		CONCLUIDOS
+ -> Validar usuario -  login

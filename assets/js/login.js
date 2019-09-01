@@ -1,53 +1,52 @@
 //=================================================================
 //======================= FUNCOES DA TELA DE LOGIN================ 
 //=================================================================
-let btnEntrar =  document.getElementById("btn-entrar");
+let btnEntrar = document.getElementById("btn-entrar");
 let pessoa;
+/*
+ * Carrega todos os usuario para o programa visto que é unica forma segura, diantes dos metodos acessores
+ * da api, de se identificar um usuario que poderá vir a logar no sistema.
+ */
 
-btnEntrar.addEventListener("click",function(){
+btnEntrar.addEventListener("click", function () {
+    let pessoa = Object.create(Pessoa);
 
-    let loginUser =  document.getElementById("nome").value;
-    let senhaUser =  document.getElementById("senha").value;    
-    if(loginUser == ""){
+    pessoa.usuario = document.getElementById("nome").value;
+    pessoa.senha = document.getElementById("senha").value;
+    if (pessoa.usuario == "") {
+        //usar erro criado pelo wedson
         alert("Preencha o campo do nome!");
         return;
-    }
-    if(senhaUser == "" ){
+    } else if (pessoa.senha == "") {
         alert("Preencha o campo de senha!");
         return;
     }
-        
-    let session= getUserByName(loginUser);
-    console.log(session)
-    if(validarSenha(senhaUser,session)){
-        pessoa = new Pessoa();
-        dividirCampos(pessoa,session);
+    let  auxPessoa = usuarioExiste(pessoa);
+
+    if (auxPessoa) {
+        pessoa = Object.create(Pessoa);
         localStorage.setItem("italk-user", pessoa.nome);
-        window.location.href = "home.html";   
+        window.location.href = "home.html";
+    } else {
+        msgUsuarioInvalido();
     }
-    else{
-        //alterar por uma div no index
-        alert("Nome ou Senha estão incorretos!");
-    }
-
 });
-
-function validarSenha(senha, session){
-    if(session[0]['senha']==senha)
-        return true;
-    else
-        return false;
-
+function dividirCampos(pessoa, session) {
+    pessoa.id = session[0]['id'];
+    pessoa.nome = session[0]['nome'];
+    pessoa.email = session[0]['email'];
+    pessoa.senha = session[0]['senha'];
+    pessoa.usuario = session[0]['usuario'];
+    pessoa.dataNasc = session[0]['data_nasc'];
 }
 
-function dividirCampos(pessoa,session){
-     pessoa.id       = session[0]['id'];
-     pessoa.nome     = session[0]['nome'];
-     pessoa.email    = session[0]['email'];
-     pessoa.senha    = session[0]['senha'];
-     pessoa.usuario  = session[0]['usuario'];
-     pessoa.dataNasc = session[0]['data_nasc'];
+function usuarioExiste(usuario) {
+    for (let elem of baseDadosUsuario) {
+        if (usuario.usuario == elem.usuario && usuario.senha == elem.senha)
+            return elem;
+    }
+    return false;
 }
-
-
-
+function msgUsuarioInvalido() {
+    alert("Nome ou Senha estão incorretos!");
+}

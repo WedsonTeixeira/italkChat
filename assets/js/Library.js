@@ -1,7 +1,6 @@
 //=================================================================
 //======================= FUNCOES DA CONEXAO COM API ============= 
 //=================================================================
-
 function getUser(c) {
     let dados;
     $.ajax({
@@ -43,9 +42,27 @@ function getUserByName(nome) {
     });
     return dados;
 }
-function getAllUser(codigo, nome) {
-
-
+function getAllUser(codigo) {
+    let dados;
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/usuario/get-all-users",
+        data: {
+            codigo: matricula_base,
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+        async:false,
+        success: function (resp) {
+            dados = resp;
+        },
+        error: function (resp) {
+            console.log("Erro :");
+            dados = resp;
+        }
+    });
+    return dados;
 }
 function addUser(codigo, nome, data_nasc, email, usuario, senha) {
 
