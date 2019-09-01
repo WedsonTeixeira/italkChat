@@ -46,10 +46,6 @@ body {
     border-radius: 4px 4px 4px 4px;
 }
 
-hr {
-    margin-bottom: 15px;
-}
-
 #tela-login {
     background: #fff;
     padding: 5px 45px 35px 45px;
@@ -112,6 +108,11 @@ button {
     position: relative;
     float: left;
 }
+#btn-sair{
+    color:#fff;
+    font-size: 18px;  
+    cursor: pointer  
+}   
 #btn-cadastrar{
     margin-top:20px;
 }
@@ -207,6 +208,9 @@ footer div h4 {
     font-weight: 7 00px;
     padding: 15px
 }
+
+
+
 #LadoEsquerdo{
     width: 30%;
     height: 100%;
@@ -221,20 +225,3 @@ footer div h4 {
     background-color: rgb(255, 255, 255);
     float: left; 
 } 
-#FundoTelaLogin
-{
-    margin-top: 20px;
-    width: 100%;
-    height: 75%;
-}
-#BotaoPes
-{
-    margin-left: 2%;
-    margin-right: 2%;
-}
-#CorA
-{
-    text-align: center;
-    color: #fff;
-}
-

@@ -1,17 +1,15 @@
-let usuario;
+
 //========  verificações ao carregar a pagina ============= 
 window.addEventListener("load", function () {
-    $("html").css("display","none");
+    let usuario;
     let btnSair =  document.getElementById("btn-sair");
     usuario = localStorage.getItem("italk-user");
-    if (usuario == null) {
+    if (usuario == null) 
         window.location.href = "index.html";
-        return;
-    }else{
-        $("html").css("display","block");
-    }
+
     btnSair.addEventListener("click", function () {
         localStorage.removeItem("italk-user");
-    })
+        window.location.href = "index.html";
+    });
 });
 //==========  finalizar a session 
