@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>Italk - Cadastro</title>
-    <script src="assets/js/home.js"></script>
     <link rel="stylesheet" href="assets/css/estilo.css" type="text/css">
     <link rel="stylesheet" href="assets/coreui-free-bootstrap-admin-template-master/css/style.min.css">
     <link rel="stylesheet"
@@ -14,6 +13,7 @@
         href="assets/coreui-free-bootstrap-admin-template-master/vendors/@coreui/icons/css/coreui-icons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <script src="assets/js/sessionUser.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -21,36 +21,27 @@
     <header id="cabecalho">
         <a href="index.html"> <span id="logo">iTALK</span></a>
         <nav id="barra-navegacao">
-            <a class="link" onclick="Deslogar();" href="index.html">DESLOGAR</a></li>
+            <a class="link" id="btn-sair" href="index.html">SAIR</a>
         </nav>
     </header>
-    <div id="FundoTelaLogin">
-        <h1></h1>
-        <div id="LadoEsquerdo">
+    <main id="tela-home">
+        <div id="painel-contatos">
             <h1 id="CorA">Amigos</h1>
             <div id="BotaoPes">
                 <div class="input-group mb-3">
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="cui-magnifying-glass h2"></i>
-                        </span>
-                    </div>
                     <input id="nome" class="form-control" type="text" placeholder="Pesquisar Amigo"">
                 </div>
             </div>
-
         </div>
+
         <div id="LadoDireito">
             <h1 style="text-align: center">Conversas</h1>
-
         </div>
-    </div>
-
+    </main>
     <footer>
 
     </footer>
-    <
+    <script src="assets/js/home.js"></script>
     <script src="assets/js/jquery.min.js"></script>
 </body>
 
