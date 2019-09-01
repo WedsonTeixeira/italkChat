@@ -7,13 +7,10 @@
 
 		EM ANDAMENTO
 
-Luiz  : -> Painel de controle do usuario
-wedson: -> Cadastro de usuario
+Luiz  : -> pegar todos os amigos
+wedson: -> 
 
 		CONCLUIDOS
-
-
-
-
-		CONCLUIDOS
+ -> Painel de controle do usuario
  -> Validar usuario -  login
+ -> Cadastro de usuario

@@ -1,40 +1,99 @@
 <html lang="pt-br">
+
 <head>
-    <script src="../assets/js/sessionUser.js"></script> 
+    <script src="../assets/js/sessionUser.js"></script>
     <meta charset="utf-8">
-    <title>Italk - Cadastro</title>
+    <title>Italk - Home</title>
     <link rel="stylesheet" href="../assets/css/estilo.css" type="text/css">
     <link rel="stylesheet" href="../assets/coreui-free-bootstrap-admin-template-master/css/style.min.css">
-    <link rel="stylesheet" href="../assets/coreui-free-bootstrap-admin-template-master/vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="../assets/coreui-free-bootstrap-admin-template-master/vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/coreui-free-bootstrap-admin-template-master/vendors/@coreui/icons/css/coreui-icons.min.css">
+    <link rel="stylesheet"
+        href="../assets/coreui-free-bootstrap-admin-template-master/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet"
+        href="../assets/coreui-free-bootstrap-admin-template-master/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="../assets/coreui-free-bootstrap-admin-template-master/vendors/@coreui/icons/css/coreui-icons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
-  
+
 </head>
 
 <body>
     <!-- barra de navegação -->
-    <header id="cabecalho">
-        <a href="index.html"> <span id="logo">iTALK</span></a>
+    <header class="navbar" id="cabecalho">
+        <a href="index.html" class="navbar-brand"> <span id="logo">iTALK</span></a>
         <nav id="barra-navegacao">
             <div id="btn-sair">
+                <span id="nome-usuario"> </span>
                 <i class=" icon-logout icons font-2xl"></i>
                 <span>Sair</span>
-            </div
+            </div>
         </nav>
     </header>
-    <main id="tela-home">
-        <div id="painel-contatos">
-        </div>
-           
-    </main>
+    <main>
+        <div class="container-fluid">
+            <div class="row " id="painel-contatos">
+                <div class="col-sm-4 " id="lista-contatos">
+                    <nav class="navbar  border-bottom ">
+                        <span class="navbar-brand ">Contatos</span>
+                    </nav>
 
+                    <ol class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Luiz M</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Wedson T</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Rafael</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Wesley</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-sm-8" id="conversa">
+                    <nav class="navbar  border-bottom ">
+                        <span class="navbar-brand ">Conversa</span>
+                    </nav>
+                    <div id="conteudo-conversa">
+                        <div class="mensagem-emissor">
+                            <span class="mensagem-esq">wedson, bora fazer o trabalho! </span>
+                        </div>
+                        <div class="mensagem-emissor">
+                            <span class="mensagem-esq">entra logo no hangouts! </span>
+                        </div>
+
+                        <div class="mensagem-receptor">
+                            <span class="mensagem-dir">Pera ae pow, manda o link ai </span>
+                        </div>
+
+                        <div class="mensagem-emissor">
+                            <span class="mensagem-esq">Ok, pera ai! </span>
+                        </div>
+
+                        <div class="mensagem-receptor">
+                            <span class="mensagem-dir">certo </span>
+                        </div>
+
+                        <div class="mensagem-emissor">
+                            <span class="mensagem-esq">Ok, pera ai! </span>
+                        </div>
+
+                        <div class="mensagem-receptor">
+                            <span class="mensagem-dir">certo </span>
+                        </div>
+                    </div>
+                    <form>
+                        <input class="form-control" placeholder="Digite uma mensagem" id="mensagem" type="text">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/baseChat.js"></script>
     <script src="../assets/js/Library.js"></script>
     <script src="../assets/js/home.js"></script>
-    
 </body>
-
 </html>

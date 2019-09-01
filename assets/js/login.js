@@ -24,11 +24,10 @@ btnEntrar.addEventListener("click", function () {
         return;
     }
     let  auxPessoa = usuarioExiste(pessoa);
-
     if (auxPessoa) {
         pessoa = Object.create(Pessoa);
         localStorage.setItem("italk-user", pessoa.nome);
-        window.location.href = "home.html";
+        window.location.href = "home.html?usuario="+auxPessoa.id;
     } else {
         msgUsuarioInvalido();
     }
