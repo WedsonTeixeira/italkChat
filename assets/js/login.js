@@ -26,8 +26,9 @@ btnEntrar.addEventListener("click", function () {
     let  auxPessoa = usuarioExiste(pessoa);
     if (auxPessoa) {
         pessoa = Object.create(Pessoa);
-        localStorage.setItem("italk-user", pessoa.nome);
-        window.location.href = "home.html?usuario="+auxPessoa.id;
+        localStorage.setItem("italk-user",JSON.stringify(auxPessoa));
+      
+        location.href="home.html"
     } else {
         msgUsuarioInvalido();
     }

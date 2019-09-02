@@ -6,7 +6,7 @@ function getUser(id_user) {
     $.ajax({
         url: "http://chatjs.gitedu.com.br/usuario/get-all-users?",
         dataType : 'json',
-        data :{codigo = matricula_base,
+        data :{codigo:matricula_base,
                 id:id_user},
         success: function (resp) {
             dados = resp;

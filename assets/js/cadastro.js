@@ -108,7 +108,10 @@ btncadastro.addEventListener("click", function () {
             setTimeout(function(){ 
                 document.getElementsByName("CadastroUsuario")[0].submit();
                 deletedivSucess.parentNode.removeChild(deletedivSucess); 
+                location.href="index.html"
             }, 4000);
+           
+        
         }    
     }
 });
