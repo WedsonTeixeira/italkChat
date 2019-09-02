@@ -100,17 +100,78 @@ function addFriend(codigo, usuario_id, amigo_id) {
 }
 
 
-function addMsg(codigo, remetente_id, receptor_id, mensagem, data) {
+function addMsg(remetenteId, receptorId, mensagem, data) {
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/mensagem//add-msg",
+        data: {
+            codigo: matricula_base,
+            remetente_id: remetenteId,
+            receptor_id: receptorId,
+      
 
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+
+        success: function (data) {
+           console.log("enviado")
+        },
+        error: function (resp) {
+            console.log("nao enviado")
+           
+        }
+    });
 
 }
 
-function getMsgs(codigo, remetente_id, receptor_id) {
+function getMsgs(remetenteId, receptorId) {
+    let dados;
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs",
+        data: {
+            codigo: matricula_base,
+            remetente_id: remetenteId,
+            receptor_id: receptorId
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+       async:false,
+        success: function (data) {
+           dados = data;
+        },
+        error: function (resp) {
+            dados = data;
+        }
+    });
+    return dados;
 
 }
 
-function getMsgsFromRemetenteId(codigo, remetente_id) {
-
+function getMsgsFromRemetenteId(codigo, remetenteId) {
+    let dados;
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs-from-remetente-id",
+        data: {
+            codigo: matricula_base,
+            remetente_id: remetenteId,
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+       async:false,
+        success: function (data) {
+           dados = data;
+        },
+        error: function (resp) {
+            dados = data;
+        }
+    });
+    return dados;
 
 }
 

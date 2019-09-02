@@ -254,25 +254,20 @@ footer div h4 {
 ::-webkit-scrollbar-thumb {
     background: #dad7d7;
 }
-.mensagem-dir{
+
+.mensagem-dir   {
     padding:2% 5% 2% 2%;
     font-size: 17px;
     background-color: rgb(210, 209, 230);
-    border-radius: 4px 4px 4px
+    border-radius: 4px 4px 4px;
+    margin:2%;
+    float:right; 
 }  
 .mensagem-esq{
     padding:2% 10% 2% 2%;
     font-size: 17px;
     background-color: rgb(140, 182, 230);
     border-radius: 4px 4px 4px;
-}    
-.mensagem-esq{
     margin:2%;
     float:left; 
-
-}
-.mensagem-dir{   
-     margin:2%;
-    float:right; 
-
-}
+}    
