@@ -244,6 +244,7 @@ footer div h4 {
     overflow:auto;
     height: 390px;
 }
+
 ::-webkit-scrollbar-track {
     background-color: #F4F4F4;
 }
@@ -271,3 +272,17 @@ footer div h4 {
     margin:2%;
     float:left; 
 }    
+
+
+.item-contato {
+   color:#000;
+    cursor:pointer;
+    font-size: 20px;
+}
+
+.item-contato a:hover{
+    background-color:rgb(101, 106, 149);
+}
+.item-contato:hover{
+    color:#fff;
+}

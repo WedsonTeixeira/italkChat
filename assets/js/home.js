@@ -2,36 +2,49 @@ let pessoa = Object.create(Pessoa);
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    carregaMensagens(12, 13);
-
     let ArrayAmigos = getAllFriends(pessoa.id);
     CriarAmigos(ArrayAmigos);
-
 });
+
+
+function buscarMensagens(obj){
+    let id = quebrarId(obj);
+    limpaPainelMensagem();
+    carregaMensagens(pessoa.id,id);
+} 
+
+function quebrarId(obj){
+    let id;
+    for(let i in obj.id){
+        if(obj.id[i]=='-'){
+            id=obj.id.substr(++i,(obj.id.length-2));
+        }
+    }
+    return id;
+} 
 
 function CriarAmigos(usuario) {
     for (let i = 0; i < usuario.length; i++) {
         
         let Lista = document.getElementById("ListaAmigos");
-        let li = CriarTagLiAmigos(usuario[i].nome);
+        let li = CriarTagLiAmigos(usuario[i].nome,usuario[i].nome+'-'+usuario[i].id);
         Lista.insertAdjacentElement("beforeEnd", li);
-
-        let ListaAux = document.getElementById(usuario[i].nome);
+        let ListaAux = document.getElementById(usuario[i].nome+'-'+usuario[i].id);
         let a = CriarTagaAmigos(usuario[i].nome);
-        ListaAux.insertAdjacentElement("beforeEnd", a);
+        ListaAux.insertAdjacentElement("beforeEnd",a);
     }
     return false;
 }
-function CriarTagLiAmigos(id) {
+function CriarTagLiAmigos(nome,id) {
     var li = document.createElement('li');
-    li.setAttribute('class', 'nav-item');
+    li.setAttribute('class', ' item-contato');
     li.setAttribute("id", id);
+    li.setAttribute("onclick","buscarMensagens(this)");
     return li;
 }
 function CriarTagaAmigos(texto) {
     var a = document.createElement('a');
-    a.setAttribute('class', 'nav-link active');
-    a.setAttribute('href', '#');
+    a.setAttribute('class', ' list-group-item list-group-item');
     a.textContent =  texto;
     return a;
 }
@@ -39,7 +52,6 @@ function CriarTagaAmigos(texto) {
 function carregaMensagens(remetenteId, receptorId) {
     let mensagensEmissor = getMsgs(remetenteId, receptorId);
     let mensagensReceptor = getMsgs(receptorId, remetenteId);
-
     let divMensagens;
     if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
         //não há mensagens
@@ -54,8 +66,8 @@ function carregaMensagens(remetenteId, receptorId) {
         let span;
         array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
         for (let i = 0; i < array_chat.length; i++) {
-            for (let j = i + 1; j > array_chat.length; j++) {
-                if (array_chat[i].id < array_chat[j].id) {
+            for (let j = i + 1; j < array_chat.length; j++) {
+                if (array_chat[i].id > array_chat[j].id) {
                     aux = array_chat[i];
                     array_chat[i] = array_chat[j];
                     array_chat[j] = aux;
@@ -63,12 +75,13 @@ function carregaMensagens(remetenteId, receptorId) {
                 }
             }
         }
+       
 
         for (let elem in array_chat) {
             if (array_chat[elem].remetente_id == remetenteId) {
-               MensagemEmisor(array_chat[elem].id,array_chat[elem].mensagem);
-            } else {
                MensagemReceptor(array_chat[elem].id,array_chat[elem].mensagem);
+            } else {
+               MensagemEmisor(array_chat[elem].id,array_chat[elem].mensagem);
             }
         }
         //array_chat =mensagensReceptor.slice();
@@ -77,17 +90,26 @@ function carregaMensagens(remetenteId, receptorId) {
 
 }
 
-function converteMensangens() {
-
-
-}
 
 function limpaPainelMensagem() {
-    console.log(painelMensagens);
     while (painelMensagens.firstChild != null) {
-        console.log(painelMensagens.lastChild)
         painelMensagens.removeChild(painelMensagens.firstChild)
     }
+}
+
+function MensagemEmisor(mensagemid, texto)
+{
+
+    texto=texto.substr(1,(texto.length-1));
+
+    
+    let ListaMensagem = document.getElementById("conteudo-conversa");
+    let div = CriarTagdivEmissor(mensagemid);
+    ListaMensagem.insertAdjacentElement("beforeEnd", div);
+
+    let ListaAux = document.getElementById(mensagemid);
+    let span = CriartagSpanEmissor(texto);
+    ListaAux.insertAdjacentElement("beforeEnd", span);
 }
 
 function createDiv(texto, classe) {
@@ -109,22 +131,6 @@ function createSpan(texto, classe) {
         div.setAttribute('class', classe);
     return div;
 }
-
-function MensagemEmisor(mensagemid, texto)
-{
-
-    texto=texto.substr(1,(texto.length-2));
-
-    
-    let ListaMensagem = document.getElementById("conteudo-conversa");
-    let div = CriarTagdivEmissor(mensagemid);
-    ListaMensagem.insertAdjacentElement("beforeEnd", div);
-
-    let ListaAux = document.getElementById(mensagemid);
-    let span = CriartagSpanEmissor(texto);
-    ListaAux.insertAdjacentElement("beforeEnd", span);
-}
-
 function CriarTagdivEmissor(id) {
     var div = document.createElement('div');
     div.setAttribute('class', 'mensagem-emissor');
@@ -164,3 +170,11 @@ function CriartagSpanReceptor(texto) {
     span.textContent =  texto;
     return span;
 }
+
+
+
+
+
+
+
+
