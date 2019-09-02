@@ -90,8 +90,27 @@ function addUser(nome, data_nasc, email, usuario, senha) {
     return dados;
 }
 
-function getAllFriends(codigo, usuario_id) {
-
+function getAllFriends(usuario_id) {
+    let dados;
+    $.ajax({
+        method: 'GET',
+        url: "http://chatjs.gitedu.com.br/usuario-amigo/get-all-friends?",
+        data: {
+            codigo: matricula_base,
+            usuario_id: usuario_id,
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        crossDomain: true,
+        async:false,
+        success: function (data) {
+           dados = data;
+        },
+        error: function (resp) {
+            dados = data;
+        }
+    });
+    return dados;
 
 }
 

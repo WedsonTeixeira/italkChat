@@ -2,10 +2,39 @@ let pessoa = Object.create(Pessoa);
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    this.console.log(pessoa);
     carregaMensagens(12, 13);
 
+    let ArrayAmigos = getAllFriends(pessoa.id);
+    CriarAmigos(ArrayAmigos);
+
 });
+
+function CriarAmigos(usuario) {
+    for (let i = 0; i < usuario.length; i++) {
+        
+        let Lista = document.getElementById("ListaAmigos");
+        let li = CriarTagLiAmigos(usuario[i].nome);
+        Lista.insertAdjacentElement("beforeEnd", li);
+
+        let ListaAux = document.getElementById(usuario[i].nome);
+        let a = CriarTagaAmigos(usuario[i].nome);
+        ListaAux.insertAdjacentElement("beforeEnd", a);
+    }
+    return false;
+}
+function CriarTagLiAmigos(id) {
+    var li = document.createElement('li');
+    li.setAttribute('class', 'nav-item');
+    li.setAttribute("id", id);
+    return li;
+}
+function CriarTagaAmigos(texto) {
+    var a = document.createElement('a');
+    a.setAttribute('class', 'nav-link active');
+    a.setAttribute('href', '#');
+    a.textContent =  texto;
+    return a;
+}
 
 function carregaMensagens(remetenteId, receptorId) {
     let mensagensEmissor = getMsgs(remetenteId, receptorId);
@@ -43,9 +72,6 @@ function carregaMensagens(remetenteId, receptorId) {
             }
         }
         //array_chat =mensagensReceptor.slice();
-
-        console.log("CHAT MENSAGENS")
-        console.log(array_chat)
         return true;
     }
 
