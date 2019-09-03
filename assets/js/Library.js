@@ -1,61 +1,62 @@
-//=================================================================
-//======================= FUNCOES DA CONEXAO COM API ============= 
-//=================================================================
-
-
-function getAllUser(dados){
+function getUser(id_user, dados) {
     $.ajax({
-
         url: "http://chatjs.gitedu.com.br/usuario/get-all-users?callback=",
         method: "GET",
         dataType: "jsonp",
-
         data: {
-            codigo: matricula_base
+            codigo: matricula_base,
+            id: id_user
         },
-        contentType: "application/jsonp; charset=utf-8",
         success: function (response, textStatus, jqXHR) {
             dados(response);
-           
-  
         },
         error: function (response, textStatus, jqXHR) {
-            dados(response);
-   
+            console.log(jqXHR);
         }
-
     });
 }
-function getUserByName(nome) {
-    let dados;
+function getUserByName(nome, dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/usuario/get-user-by-name?",
+        url: "http://chatjs.gitedu.com.br/usuario/get-user-by-name?callback=",
+        method: "GET",
+        dataType: "jsonp",
         data: {
             codigo: matricula_base,
             nome: nome
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        async:false,
-        success: function (resp) {
-            dados = resp;
-           
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            console.log("Erro :");
-            dados = resp;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
+}
+function getAllUser(dados){
+    $.ajax({
+        url: "http://chatjs.gitedu.com.br/usuario/get-all-users?callback=",
+        method: "GET",
+        dataType: "jsonp",
+        data: {
+            codigo: matricula_base
+        },
+        contentType: "application/jsonp; charset=utf-8",
+        dataType: "jsonp",
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
+        },
+        error: function (response, textStatus, jqXHR) {
+        }
+
+    });
 }
 
-function addUser(nome, data_nasc, email, usuario, senha) {
-    let dados;
+function addUser(nome, data_nasc, email, usuario, senha, dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/usuario/add-user?",
+        url: "http://chatjs.gitedu.com.br/usuario/add-user?callback=",
+        method: "GET",
+        dataType: "jsonp",
+
         data: {
             codigo: matricula_base,
             nome: nome,
@@ -64,127 +65,88 @@ function addUser(nome, data_nasc, email, usuario, senha) {
             usuario: usuario,
             senha: senha,
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        async:false,
-        success: function (res) {
-           dados =resp;
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            dados = data;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
 }
 
-function getAllFriends(usuario_id) {
-    let dados;
+function getAllFriends(usuario_id, dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/usuario-amigo/get-all-friends?",
+        url: "http://chatjs.gitedu.com.br/usuario-amigo/get-all-friends?callback=",
         data: {
             codigo: matricula_base,
             usuario_id: usuario_id,
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        async:false,
-        success: function (data) {
-           dados = data;
+        method: "GET",
+        dataType: "jsonp",
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            dados = data;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
-
 }
-
-function addFriend(usuario_id, amigo_id) {
-
-}
-
-function addMsg(remetenteId, receptorId, mensagem, data) {
-    let dados;
+function addMsg(remetenteId, receptorId, mensagem, data,dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/mensagem/add-msg",
+        url: "http://chatjs.gitedu.com.br/mensagem/add-msg?callback=",
+        method: "GET",
+        dataType: "jsonp",
         data: {
             codigo: matricula_base,
             remetente_id: remetenteId,
             receptor_id: receptorId,
             mensagem: mensagem,
             data: data,
-
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        async:false,
-        success: function (data) {
-           dados = data;
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            dados = data;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
 }
 
-
-function getMsgs(remetenteId, receptorId) {
-    let dados;
+function getMsgs(remetenteId, receptorId, dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs",
+        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs?callback=",
+        method: "GET",
+        dataType: "jsonp",
         data: {
             codigo: matricula_base,
             remetente_id: remetenteId,
             receptor_id: receptorId
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-       async:false,
-        success: function (data) {
-           dados = data;
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            dados = data;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
-
 }
 
-function getMsgsFromRemetenteId(codigo, remetenteId) {
-    let dados;
+function getMsgsFromRemetenteId(remetenteId, dados) {
     $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs-from-remetente-id",
+        url: "http://chatjs.gitedu.com.br/mensagem/get-msgs-from-remetente-id?callback=",
+        method: "GET",
+        dataType: "jsonp",
         data: {
             codigo: matricula_base,
             remetente_id: remetenteId,
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-       async:false,
-        success: function (data) {
-           dados = data;
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
         },
-        error: function (resp) {
-            dados = data;
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
         }
     });
-    return dados;
-
-}
-
-function getMsgsFromReceptorId(codigo, receptor_id) {
-
 }
 
 // ======================== FIM DA CONEXAO-API ============= 

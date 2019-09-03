@@ -2,14 +2,36 @@ let pessoa = Object.create(Pessoa);
 let contato = Object.create(Pessoa);
 contato.id = null;
 let amigo = null;
-let todosUsuarios =new Array();
+let todosUsuarios = new Array();
 let ArrayAmigos;
+let tamanhomensagem = 0;
 
+function carregaMensagensSemExibir(remetenteId, receptorId) {
+    let mensagensEmissor;
+    let mensagensReceptor;
+
+    getMsgs(remetenteId, receptorId, function (dados1) {
+        mensagensEmissor = dados1;
+        getMsgs(receptorId, remetenteId, function (dados2) {
+            mensagensReceptor = dados2;
+            let array_chat = new Array();
+            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            console.log(array_chat);
+            return array_chat;
+        });
+    });
+}
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    ArrayAmigos = getAllFriends(pessoa.id);
-    CriarAmigos(ArrayAmigos,"ListaAmigos","");
+    carregar();
+    getAllFriends(pessoa.id, function (dados) {
+        ArrayAmigos = dados;
+        destroiCarregar();
+        let had = document.getElementById("ListaAmigos");
+        had.style.visibility = "visible";
+        CriarAmigos(ArrayAmigos, "ListaAmigos", "");
+    });
 });
 
 function EnviarMensagem() {
@@ -17,12 +39,15 @@ function EnviarMensagem() {
     if (mensagem != "" && amigo != null) {
         document.getElementById("inputMensagem").value = "";
         let data = "02/09/2019";
-        let X = addMsg(pessoa.id, amigo, mensagem, data);
-        limpaPainelMensagem();
-        carregaMensagens(pessoa.id, amigo);
-
+        let X;
+        carregar();
+        addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
+            X = dados;
+            limpaPainelMensagem();
+            carregaMensagens(pessoa.id, amigo);
+            destroiCarregar();
+        });
     }
-
 }
 
 function buscarMensagens(obj) {
@@ -42,16 +67,16 @@ function quebrarId(obj) {
     return id;
 }
 
-function CriarAmigos(usuario,id,funcao) {
+function CriarAmigos(usuario, id, funcao) {
     for (let i = 0; i < usuario.length; i++) {
         let Lista = document.getElementById(id);
         let li = CriarTagLiAmigos(usuario[i].nome, usuario[i].nome + '-' + usuario[i].id);
-        if(funcao!="")
-            li.setAttribute("onclick",funcao)
+        if (funcao != "")
+            li.setAttribute("onclick", funcao)
         Lista.insertAdjacentElement("beforeEnd", li);
         let ListaAux = document.getElementById(usuario[i].nome + '-' + usuario[i].id);
         let a = CriarTagaAmigos(usuario[i].nome);
-        
+
         ListaAux.insertAdjacentElement("beforeEnd", a);
     }
     return false;
@@ -72,52 +97,59 @@ function CriarTagaAmigos(texto) {
 }
 
 function carregaMensagens(remetenteId, receptorId) {
-    let mensagensEmissor = getMsgs(remetenteId, receptorId);
-    let mensagensReceptor = getMsgs(receptorId, remetenteId);
-    let divMensagens;
-    if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
-        //não há mensagens
-        divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro");
-        limpaPainelMensagem();
-        painelMensagens.insertAdjacentElement("afterbegin", divMensagens);
-        return false;
-    } else {
-
-        let array_chat = new Array(),
-            aux = new Array();
-
-        if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
-            if (mensagensEmissor[1] == "Não existem mensagens") {
-                array_chat = array_chat.concat(mensagensReceptor);
-            }
-            if (mensagensReceptor[1] == "Não existem mensagens") {
-                array_chat = array_chat.concat(mensagensEmissor);
-            }
-        } else {
-            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
-        }
-        for (let i = 0; i < array_chat.length; i++) {
-            for (let j = i + 1; j < array_chat.length; j++) {
-                if (array_chat[i].id > array_chat[j].id) {
-                    aux = array_chat[i];
-                    array_chat[i] = array_chat[j];
-                    array_chat[j] = aux;
-
-                }
-            }
-        }
-        for (let elem in array_chat) {
-            if (array_chat[elem].remetente_id == remetenteId) {
-                MensagemReceptor(array_chat[elem].id, array_chat[elem].mensagem);
+    let mensagensEmissor;
+    let mensagensReceptor;
+    carregar();
+    getMsgs(remetenteId, receptorId, function (dados) {
+        mensagensEmissor = dados;
+        getMsgs(receptorId, remetenteId, function (dados) {
+            mensagensReceptor = dados;
+            let divMensagens;
+            if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
+                //não há mensagens
+                divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro");
+                limpaPainelMensagem();
+                painelMensagens.insertAdjacentElement("afterbegin", divMensagens);
+                return false;
             } else {
-                MensagemEmisor(array_chat[elem].id, array_chat[elem].mensagem);
-            }
-        }
-        //array_chat =mensagensReceptor.slice();
-        return true;
-    }
 
+                let array_chat = new Array();
+                aux = new Array();
+
+                if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
+                    if (mensagensEmissor[1] == "Não existem mensagens") {
+                        array_chat = array_chat.concat(mensagensReceptor);
+                    }
+                    if (mensagensReceptor[1] == "Não existem mensagens") {
+                        array_chat = array_chat.concat(mensagensEmissor);
+                    }
+                } else {
+                    array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+                }
+                tamanhomensagem = array_chat.length;
+                for (let i = 0; i < array_chat.length; i++) {
+                    for (let j = i + 1; j < array_chat.length; j++) {
+                        if (array_chat[i].id > array_chat[j].id) {
+                            aux = array_chat[i];
+                            array_chat[i] = array_chat[j];
+                            array_chat[j] = aux;
+
+                        }
+                    }
+                }
+                for (let elem in array_chat) {
+                    if (array_chat[elem].remetente_id == remetenteId) {
+                        MensagemReceptor(array_chat[elem].id, array_chat[elem].mensagem);
+                    } else {
+                        MensagemEmisor(array_chat[elem].id, array_chat[elem].mensagem);
+                    }
+                }
+                destroiCarregar();
+            }
+        });
+    });
 }
+
 
 
 function limpaPainelMensagem() {
@@ -143,6 +175,43 @@ function MensagemEmisor(mensagemid, texto) {
     let span = CriartagSpanEmissor(texto);
     ListaAux.insertAdjacentElement("beforeEnd", span);
 }
+function MensagemReceptor(mensagemid, texto) {
+
+    let ListaMensagem = document.getElementById("conteudo-conversa");
+    let div = CriarTagdivReceptor(mensagemid);
+    ListaMensagem.insertAdjacentElement("beforeEnd", div);
+
+    let ListaAux = document.getElementById(mensagemid);
+    let span = CriartagSpanReceptor(texto);
+    ListaAux.insertAdjacentElement("beforeEnd", span);
+}
+function CriarTagdivReceptor(id) {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'mensagem-receptor');
+    div.setAttribute("id", id);
+    return div;
+}
+function CriarTagdivEmissor(id) {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'mensagem-emissor');
+    div.setAttribute("id", id);
+    return div;
+
+}
+
+function CriartagSpanReceptor(texto) {
+    var span = document.createElement('span');
+    span.setAttribute('class', 'mensagem-dir');
+    span.textContent = texto;
+    return span;
+}
+
+function CriartagSpanEmissor(texto) {
+    var span = document.createElement('span');
+    span.setAttribute('class', 'mensagem-esq');
+    span.textContent = texto;
+    return span;
+}
 
 function createDiv(texto, classe) {
     let div;
@@ -164,78 +233,30 @@ function createSpan(texto, classe) {
     return div;
 }
 
-function CriarTagdivEmissor(id) {
-    var div = document.createElement('div');
-    div.setAttribute('class', 'mensagem-emissor');
-    div.setAttribute("id", id);
-    return div;
-
-}
-
-function CriartagSpanEmissor(texto) {
-    var span = document.createElement('span');
-    span.setAttribute('class', 'mensagem-esq');
-    span.textContent = texto;
-    return span;
-}
-
-function MensagemReceptor(mensagemid, texto) {
-
-    let ListaMensagem = document.getElementById("conteudo-conversa");
-    let div = CriarTagdivReceptor(mensagemid);
-    ListaMensagem.insertAdjacentElement("beforeEnd", div);
-
-    let ListaAux = document.getElementById(mensagemid);
-    let span = CriartagSpanReceptor(texto);
-    ListaAux.insertAdjacentElement("beforeEnd", span);
-}
-
-function CriarTagdivReceptor(id) {
-    var div = document.createElement('div');
-    div.setAttribute('class', 'mensagem-receptor');
-    div.setAttribute("id", id);
-    return div;
-}
-
-function CriartagSpanReceptor(texto) {
-    var span = document.createElement('span');
-    span.setAttribute('class', 'mensagem-dir');
-    span.textContent = texto;
-    return span;
-}
-
-setInterval(function () {
-    if (amigo != null) {
-        limpaPainelMensagem();
-        carregaMensagens(pessoa.id, amigo);
-    }
-}, 2000);
-
 //===============  ADICIONAR NOVO CONTATO =====================
-
 let painelAddContato = document.getElementById("painel-adicionar");
 painelAddContato.addEventListener("click", function () {
     let painelTodosContatos = document.getElementById("ListaNovosContatos");
-    if(painelTodosContatos.style.visibility=="visible")
+    if (painelTodosContatos.style.visibility == "visible")
         return;
-    document.getElementById("ListaAmigos").style ="visibility:hidden";
-    painelTodosContatos.style="visibility:visible";
-    let todosUsuarios =  getAllUser();
-    let auxAmigos = new Array(); 
+    document.getElementById("ListaAmigos").style = "visibility:hidden";
+    painelTodosContatos.style = "visibility:visible";
+    let todosUsuarios = getAllUser();
+    let auxAmigos = new Array();
 
     auxAmigos = ArrayAmigos.slice();
     auxAmigos.push(pessoa)
-    verificarNaoAmigos(todosUsuarios,auxAmigos);
+    verificarNaoAmigos(todosUsuarios, auxAmigos);
     limpaPainelContatos("ListaAmigos");
-    CriarAmigos(todosUsuarios,"ListaNovosContatos","addNovoContato(this)")
-    
+    CriarAmigos(todosUsuarios, "ListaNovosContatos", "addNovoContato(this)")
+
 });
 
-function verificarNaoAmigos(todosUsuarios,amigos){
-    for(let meuAmigo of amigos){
-        for(let i in todosUsuarios ){
-            if(todosUsuarios[i].id == meuAmigo.id ){
-                todosUsuarios.splice(i,1);
+function verificarNaoAmigos(todosUsuarios, amigos) {
+    for (let meuAmigo of amigos) {
+        for (let i in todosUsuarios) {
+            if (todosUsuarios[i].id == meuAmigo.id) {
+                todosUsuarios.splice(i, 1);
             }
         }
     }
@@ -244,16 +265,15 @@ function verificarNaoAmigos(todosUsuarios,amigos){
 let painelListaAmigos = document.getElementById("painel-meus-contatos");
 painelListaAmigos.addEventListener("click", function () {
     let listaAmigos = document.getElementById("ListaAmigos");
-    if(listaAmigos.style.visibility=="visible")
+    if (listaAmigos.style.visibility == "visible")
         return;
-    document.getElementById("ListaNovosContatos").style ="visibility:hidden";
-    listaAmigos.style="visibility:visible";
+    document.getElementById("ListaNovosContatos").style = "visibility:hidden";
+    listaAmigos.style = "visibility:visible";
     limpaPainelContatos("ListaNovosContatos");
-    CriarAmigos(ArrayAmigos,"ListaAmigos","");
-   
+    CriarAmigos(ArrayAmigos, "ListaAmigos", "");
+
 });
 
-function addNovoContato(obj){
-    
-    confirm("Deseja Adicionar "+obj.firstChild.textContent+" a sua lista de contatos?");
+function addNovoContato(obj) {
+    confirm("Deseja Adicionar " + obj.firstChild.textContent + " a sua lista de contatos?");
 }

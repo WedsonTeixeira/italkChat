@@ -22,13 +22,10 @@ window.addEventListener("load", function () {
     carregar();
     getAllUser(function(dados) {
         baseDadosUsuario = dados;
-        destroiCarregar()
+        destroiCarregar();
      });
-     
  });
  
-
-
 function carregar(){
 
   let divCarregar =  document.createElement("div");
