@@ -57,8 +57,7 @@ function getAllUser(codigo) {
             dados = resp;
         },
         error: function (resp) {
-            console.log("Erro :");
-            dados = resp;
+            dados = data;
         }
     });
     return dados;
@@ -80,8 +79,8 @@ function addUser(nome, data_nasc, email, usuario, senha) {
         dataType: "json",
         crossDomain: true,
         async:false,
-        success: function (data) {
-           dados = data;
+        success: function (res) {
+           dados =resp;
         },
         error: function (resp) {
             dados = data;

@@ -1,4 +1,6 @@
 let pessoa = Object.create(Pessoa);
+let contato = Object.create(Pessoa);
+contato.id=null;
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
@@ -63,7 +65,7 @@ function carregaMensagens(remetenteId, receptorId) {
 
         let array_chat = new Array(),
             aux = new Array();
-        let span;
+
         array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
         for (let i = 0; i < array_chat.length; i++) {
             for (let j = i + 1; j < array_chat.length; j++) {
@@ -75,8 +77,6 @@ function carregaMensagens(remetenteId, receptorId) {
                 }
             }
         }
-       
-
         for (let elem in array_chat) {
             if (array_chat[elem].remetente_id == remetenteId) {
                MensagemReceptor(array_chat[elem].id,array_chat[elem].mensagem);
@@ -100,8 +100,7 @@ function limpaPainelMensagem() {
 function MensagemEmisor(mensagemid, texto)
 {
 
-    texto=texto.substr(1,(texto.length-1));
-
+    
     
     let ListaMensagem = document.getElementById("conteudo-conversa");
     let div = CriarTagdivEmissor(mensagemid);
@@ -147,7 +146,6 @@ function CriartagSpanEmissor(texto) {
 
 function MensagemReceptor(mensagemid, texto)
 {
-    texto=texto.substr(1,(texto.length-1));
 
     let ListaMensagem = document.getElementById("conteudo-conversa");
     let div = CriarTagdivReceptor(mensagemid);
@@ -173,8 +171,13 @@ function CriartagSpanReceptor(texto) {
 
 
 
+//===============  ADICIONAR NOVO CONTATO =====================
 
+let btnAddContato =  document.getElementById("btn-adicionar");
+btnAddContato.addEventListener("click",function(){
 
-
-
-
+    document.getElementById("ListaAmigos").setAttribute("style","display:none");
+    let painelTodosContatos = document.getElementById("todos-contatos");
+    painelTodosContatos.setAttribute("style","display:block");
+    
+})

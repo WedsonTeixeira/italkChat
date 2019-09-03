@@ -286,3 +286,12 @@ footer div h4 {
 .item-contato:hover{
     color:#fff;
 }
+
+
+#btn-adicionar{
+    cursor: pointer;
+
+}
+#todos-contatos{
+    display:none;
+}

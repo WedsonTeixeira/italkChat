@@ -3,14 +3,16 @@
 -> Pesquisar amigos
 -> Adicionar amigos
 -> Enviar/receber mensagem
--> Listar amigos
+
 
 		EM ANDAMENTO
 
-Luiz  : -> pegar todos os amigos
-wedson: -> 
+Luiz  : 
+wedson: 
 
 		CONCLUIDOS
  -> Painel de controle do usuario
  -> Validar usuario -  login
  -> Cadastro de usuario
+ -> pegar todos os amigos
+ -> Listar amigos
