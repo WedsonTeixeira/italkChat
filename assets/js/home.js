@@ -2,28 +2,29 @@ let pessoa = Object.create(Pessoa);
 let contato = Object.create(Pessoa);
 contato.id = null;
 let amigo = null;
+let todosUsuarios =new Array();
+let ArrayAmigos;
 
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    let ArrayAmigos = getAllFriends(pessoa.id);
-    CriarAmigos(ArrayAmigos);
+    ArrayAmigos = getAllFriends(pessoa.id);
+    CriarAmigos(ArrayAmigos,"ListaAmigos","");
 });
 
-function EnviarMensagem()
-{
+function EnviarMensagem() {
     let mensagem = document.getElementById("inputMensagem").value;
-    if(mensagem != "" && amigo != null)
-    {
+    if (mensagem != "" && amigo != null) {
         document.getElementById("inputMensagem").value = "";
         let data = "02/09/2019";
         let X = addMsg(pessoa.id, amigo, mensagem, data);
         limpaPainelMensagem();
         carregaMensagens(pessoa.id, amigo);
-        
+
     }
 
 }
+
 function buscarMensagens(obj) {
     let id = quebrarId(obj);
     limpaPainelMensagem();
@@ -41,14 +42,16 @@ function quebrarId(obj) {
     return id;
 }
 
-function CriarAmigos(usuario) {
+function CriarAmigos(usuario,id,funcao) {
     for (let i = 0; i < usuario.length; i++) {
-
-        let Lista = document.getElementById("ListaAmigos");
+        let Lista = document.getElementById(id);
         let li = CriarTagLiAmigos(usuario[i].nome, usuario[i].nome + '-' + usuario[i].id);
+        if(funcao!="")
+            li.setAttribute("onclick",funcao)
         Lista.insertAdjacentElement("beforeEnd", li);
         let ListaAux = document.getElementById(usuario[i].nome + '-' + usuario[i].id);
         let a = CriarTagaAmigos(usuario[i].nome);
+        
         ListaAux.insertAdjacentElement("beforeEnd", a);
     }
     return false;
@@ -60,6 +63,7 @@ function CriarTagLiAmigos(nome, id) {
     li.setAttribute("onclick", "buscarMensagens(this)");
     return li;
 }
+
 function CriarTagaAmigos(texto) {
     var a = document.createElement('a');
     a.setAttribute('class', ' list-group-item list-group-item');
@@ -80,7 +84,7 @@ function carregaMensagens(remetenteId, receptorId) {
     } else {
 
         let array_chat = new Array(),
-        aux = new Array();
+            aux = new Array();
 
         if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
             if (mensagensEmissor[1] == "Não existem mensagens") {
@@ -89,8 +93,7 @@ function carregaMensagens(remetenteId, receptorId) {
             if (mensagensReceptor[1] == "Não existem mensagens") {
                 array_chat = array_chat.concat(mensagensEmissor);
             }
-        }
-        else {
+        } else {
             array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
         }
         for (let i = 0; i < array_chat.length; i++) {
@@ -123,9 +126,14 @@ function limpaPainelMensagem() {
     }
 }
 
+function limpaPainelContatos(id) {
+    let painelContatos = document.getElementById(id);
+    while (painelContatos.firstChild != null) {
+        painelContatos.removeChild(painelContatos.firstChild)
+    }
+}
+
 function MensagemEmisor(mensagemid, texto) {
-
-
 
     let ListaMensagem = document.getElementById("conteudo-conversa");
     let div = CriarTagdivEmissor(mensagemid);
@@ -155,6 +163,7 @@ function createSpan(texto, classe) {
         div.setAttribute('class', classe);
     return div;
 }
+
 function CriarTagdivEmissor(id) {
     var div = document.createElement('div');
     div.setAttribute('class', 'mensagem-emissor');
@@ -162,6 +171,7 @@ function CriarTagdivEmissor(id) {
     return div;
 
 }
+
 function CriartagSpanEmissor(texto) {
     var span = document.createElement('span');
     span.setAttribute('class', 'mensagem-esq');
@@ -186,6 +196,7 @@ function CriarTagdivReceptor(id) {
     div.setAttribute("id", id);
     return div;
 }
+
 function CriartagSpanReceptor(texto) {
     var span = document.createElement('span');
     span.setAttribute('class', 'mensagem-dir');
@@ -193,15 +204,55 @@ function CriartagSpanReceptor(texto) {
     return span;
 }
 
-
+setInterval(function () {
+    if (amigo != null) {
+        limpaPainelMensagem();
+        carregaMensagens(pessoa.id, amigo);
+    }
+}, 2000);
 
 //===============  ADICIONAR NOVO CONTATO =====================
 
-let btnAddContato = document.getElementById("btn-adicionar");
-btnAddContato.addEventListener("click", function () {
+let painelAddContato = document.getElementById("painel-adicionar");
+painelAddContato.addEventListener("click", function () {
+    let painelTodosContatos = document.getElementById("ListaNovosContatos");
+    if(painelTodosContatos.style.visibility=="visible")
+        return;
+    document.getElementById("ListaAmigos").style ="visibility:hidden";
+    painelTodosContatos.style="visibility:visible";
+    let todosUsuarios =  getAllUser();
+    let auxAmigos = new Array(); 
 
-    document.getElementById("ListaAmigos").setAttribute("style", "display:none");
-    let painelTodosContatos = document.getElementById("todos-contatos");
-    painelTodosContatos.setAttribute("style", "display:block");
+    auxAmigos = ArrayAmigos.slice();
+    auxAmigos.push(pessoa)
+    verificarNaoAmigos(todosUsuarios,auxAmigos);
+    limpaPainelContatos("ListaAmigos");
+    CriarAmigos(todosUsuarios,"ListaNovosContatos","addNovoContato(this)")
+    
+});
 
-})
+function verificarNaoAmigos(todosUsuarios,amigos){
+    for(let meuAmigo of amigos){
+        for(let i in todosUsuarios ){
+            if(todosUsuarios[i].id == meuAmigo.id ){
+                todosUsuarios.splice(i,1);
+            }
+        }
+    }
+}
+
+let painelListaAmigos = document.getElementById("painel-meus-contatos");
+painelListaAmigos.addEventListener("click", function () {
+    let listaAmigos = document.getElementById("ListaAmigos");
+    if(listaAmigos.style.visibility=="visible")
+        return;
+    document.getElementById("ListaNovosContatos").style ="visibility:hidden";
+    listaAmigos.style="visibility:visible";
+    limpaPainelContatos("ListaNovosContatos");
+    CriarAmigos(ArrayAmigos,"ListaAmigos","");
+   
+});
+
+function addNovoContato(obj){
+    confirm("Deseja Adicionar "+obj.firstChild.textContent+" a sua lista de contatos?");
+}

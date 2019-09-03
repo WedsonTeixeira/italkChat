@@ -1,6 +1,8 @@
 //=================================================================
 //======================= FUNCOES DA CONEXAO COM API ============= 
 //=================================================================
+
+
 function getUser(id_user) {
     let dados;
     $.ajax({
@@ -41,7 +43,7 @@ function getUserByName(nome) {
     });
     return dados;
 }
-function getAllUser(codigo) {
+function getAllUser() {
     let dados;
     $.ajax({
         method: 'GET',
@@ -57,7 +59,7 @@ function getAllUser(codigo) {
             dados = resp;
         },
         error: function (resp) {
-            dados = data;
+            dados = resp;
         }
     });
     return dados;
@@ -113,10 +115,9 @@ function getAllFriends(usuario_id) {
 
 }
 
-function addFriend(codigo, usuario_id, amigo_id) {
+function addFriend(usuario_id, amigo_id) {
 
 }
-
 
 function addMsg(remetenteId, receptorId, mensagem, data) {
     let dados;
