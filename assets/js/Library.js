@@ -3,22 +3,28 @@
 //=================================================================
 
 
-function getUser(id_user) {
-    let dados;
+function getAllUser(dados){
     $.ajax({
-        url: "http://chatjs.gitedu.com.br/usuario/get-all-users?",
-        dataType : 'json',
-        data :{codigo:matricula_base,
-                id:id_user},
-        success: function (resp) {
-            dados = resp;
+
+        url: "http://chatjs.gitedu.com.br/usuario/get-all-users?callback=",
+        method: "GET",
+        dataType: "jsonp",
+
+        data: {
+            codigo: matricula_base
         },
-        error: function (resp) {
-            console.log("Erro:");
-            dados = resp;
+        contentType: "application/jsonp; charset=utf-8",
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
+           
+  
+        },
+        error: function (response, textStatus, jqXHR) {
+            dados(response);
+   
         }
+
     });
-    return dados;
 }
 function getUserByName(nome) {
     let dados;
@@ -35,6 +41,7 @@ function getUserByName(nome) {
         async:false,
         success: function (resp) {
             dados = resp;
+           
         },
         error: function (resp) {
             console.log("Erro :");
@@ -43,27 +50,7 @@ function getUserByName(nome) {
     });
     return dados;
 }
-function getAllUser() {
-    let dados;
-    $.ajax({
-        method: 'GET',
-        url: "http://chatjs.gitedu.com.br/usuario/get-all-users",
-        data: {
-            codigo: matricula_base,
-        },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        async:false,
-        success: function (resp) {
-            dados = resp;
-        },
-        error: function (resp) {
-            dados = resp;
-        }
-    });
-    return dados;
-}
+
 function addUser(nome, data_nasc, email, usuario, senha) {
     let dados;
     $.ajax({

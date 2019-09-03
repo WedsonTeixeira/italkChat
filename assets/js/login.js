@@ -10,9 +10,8 @@ let pessoa;
  */
 
 btnEntrar.addEventListener("click", function () {
-    console.log(baseDadosUsuario.length)
+    //================================================
     let pessoa = Object.create(Pessoa);
-
     pessoa.usuario = document.getElementById("nome").value;
     pessoa.senha = document.getElementById("senha").value;
     if (pessoa.usuario == "") {

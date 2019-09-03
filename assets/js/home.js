@@ -254,5 +254,6 @@ painelListaAmigos.addEventListener("click", function () {
 });
 
 function addNovoContato(obj){
+    
     confirm("Deseja Adicionar "+obj.firstChild.textContent+" a sua lista de contatos?");
 }
