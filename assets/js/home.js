@@ -26,7 +26,14 @@ window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
     carregar();
     getAllFriends(pessoa.id, function (dados) {
-        ArrayAmigos = dados;
+        if(dados[1] == "Não encontrado")
+        {
+            ArrayAmigos = new Array();
+        }
+        else
+        {
+            ArrayAmigos = dados;
+        }
         destroiCarregar();
         let had = document.getElementById("ListaAmigos");
         had.style.visibility = "visible";
@@ -241,15 +248,16 @@ painelAddContato.addEventListener("click", function () {
         return;
     document.getElementById("ListaAmigos").style = "visibility:hidden";
     painelTodosContatos.style = "visibility:visible";
-    let todosUsuarios = getAllUser();
-    let auxAmigos = new Array();
 
-    auxAmigos = ArrayAmigos.slice();
-    auxAmigos.push(pessoa)
-    verificarNaoAmigos(todosUsuarios, auxAmigos);
-    limpaPainelContatos("ListaAmigos");
-    CriarAmigos(todosUsuarios, "ListaNovosContatos", "addNovoContato(this)")
-
+    getAllUser(function (dados) {
+        let todosUsuarios = dados;
+        let auxAmigos = new Array();
+        auxAmigos = ArrayAmigos.slice();
+        auxAmigos.push(pessoa)
+        verificarNaoAmigos(todosUsuarios, auxAmigos);
+        limpaPainelContatos("ListaAmigos");
+        CriarAmigos(todosUsuarios, "ListaNovosContatos", "addNovoContato(this)")
+    });
 });
 
 function verificarNaoAmigos(todosUsuarios, amigos) {

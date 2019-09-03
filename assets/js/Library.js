@@ -40,8 +40,6 @@ function getAllUser(dados){
         data: {
             codigo: matricula_base
         },
-        contentType: "application/jsonp; charset=utf-8",
-        dataType: "jsonp",
         success: function (response, textStatus, jqXHR) {
             dados(response);
         },
