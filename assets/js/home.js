@@ -1,6 +1,8 @@
 let pessoa = Object.create(Pessoa);
 let contato = Object.create(Pessoa);
-contato.id=null;
+contato.id = null;
+let amigo = null;
+
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
@@ -8,46 +10,60 @@ window.addEventListener('load', function () {
     CriarAmigos(ArrayAmigos);
 });
 
+function EnviarMensagem()
+{
+    let mensagem = document.getElementById("inputMensagem").value;
+    if(mensagem != "" && amigo != null)
+    {
+        document.getElementById("inputMensagem").value = "";
+        let data = "02/09/2019";
+        let X = addMsg(pessoa.id, amigo, mensagem, data);
+        limpaPainelMensagem();
+        carregaMensagens(pessoa.id, amigo);
+        
+    }
 
-function buscarMensagens(obj){
+}
+function buscarMensagens(obj) {
     let id = quebrarId(obj);
     limpaPainelMensagem();
-    carregaMensagens(pessoa.id,id);
-} 
+    amigo = id;
+    carregaMensagens(pessoa.id, id);
+}
 
-function quebrarId(obj){
+function quebrarId(obj) {
     let id;
-    for(let i in obj.id){
-        if(obj.id[i]=='-'){
-            id=obj.id.substr(++i,(obj.id.length-2));
+    for (let i in obj.id) {
+        if (obj.id[i] == '-') {
+            id = obj.id.substr(++i, (obj.id.length - 2));
         }
     }
     return id;
-} 
+}
 
 function CriarAmigos(usuario) {
     for (let i = 0; i < usuario.length; i++) {
-        
+
         let Lista = document.getElementById("ListaAmigos");
-        let li = CriarTagLiAmigos(usuario[i].nome,usuario[i].nome+'-'+usuario[i].id);
+        let li = CriarTagLiAmigos(usuario[i].nome, usuario[i].nome + '-' + usuario[i].id);
         Lista.insertAdjacentElement("beforeEnd", li);
-        let ListaAux = document.getElementById(usuario[i].nome+'-'+usuario[i].id);
+        let ListaAux = document.getElementById(usuario[i].nome + '-' + usuario[i].id);
         let a = CriarTagaAmigos(usuario[i].nome);
-        ListaAux.insertAdjacentElement("beforeEnd",a);
+        ListaAux.insertAdjacentElement("beforeEnd", a);
     }
     return false;
 }
-function CriarTagLiAmigos(nome,id) {
+function CriarTagLiAmigos(nome, id) {
     var li = document.createElement('li');
     li.setAttribute('class', ' item-contato');
     li.setAttribute("id", id);
-    li.setAttribute("onclick","buscarMensagens(this)");
+    li.setAttribute("onclick", "buscarMensagens(this)");
     return li;
 }
 function CriarTagaAmigos(texto) {
     var a = document.createElement('a');
     a.setAttribute('class', ' list-group-item list-group-item');
-    a.textContent =  texto;
+    a.textContent = texto;
     return a;
 }
 
@@ -64,9 +80,19 @@ function carregaMensagens(remetenteId, receptorId) {
     } else {
 
         let array_chat = new Array(),
-            aux = new Array();
+        aux = new Array();
 
-        array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+        if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
+            if (mensagensEmissor[1] == "Não existem mensagens") {
+                array_chat = array_chat.concat(mensagensReceptor);
+            }
+            if (mensagensReceptor[1] == "Não existem mensagens") {
+                array_chat = array_chat.concat(mensagensEmissor);
+            }
+        }
+        else {
+            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+        }
         for (let i = 0; i < array_chat.length; i++) {
             for (let j = i + 1; j < array_chat.length; j++) {
                 if (array_chat[i].id > array_chat[j].id) {
@@ -79,9 +105,9 @@ function carregaMensagens(remetenteId, receptorId) {
         }
         for (let elem in array_chat) {
             if (array_chat[elem].remetente_id == remetenteId) {
-               MensagemReceptor(array_chat[elem].id,array_chat[elem].mensagem);
+                MensagemReceptor(array_chat[elem].id, array_chat[elem].mensagem);
             } else {
-               MensagemEmisor(array_chat[elem].id,array_chat[elem].mensagem);
+                MensagemEmisor(array_chat[elem].id, array_chat[elem].mensagem);
             }
         }
         //array_chat =mensagensReceptor.slice();
@@ -97,11 +123,10 @@ function limpaPainelMensagem() {
     }
 }
 
-function MensagemEmisor(mensagemid, texto)
-{
+function MensagemEmisor(mensagemid, texto) {
 
-    
-    
+
+
     let ListaMensagem = document.getElementById("conteudo-conversa");
     let div = CriarTagdivEmissor(mensagemid);
     ListaMensagem.insertAdjacentElement("beforeEnd", div);
@@ -140,12 +165,11 @@ function CriarTagdivEmissor(id) {
 function CriartagSpanEmissor(texto) {
     var span = document.createElement('span');
     span.setAttribute('class', 'mensagem-esq');
-    span.textContent =  texto;
+    span.textContent = texto;
     return span;
 }
 
-function MensagemReceptor(mensagemid, texto)
-{
+function MensagemReceptor(mensagemid, texto) {
 
     let ListaMensagem = document.getElementById("conteudo-conversa");
     let div = CriarTagdivReceptor(mensagemid);
@@ -165,7 +189,7 @@ function CriarTagdivReceptor(id) {
 function CriartagSpanReceptor(texto) {
     var span = document.createElement('span');
     span.setAttribute('class', 'mensagem-dir');
-    span.textContent =  texto;
+    span.textContent = texto;
     return span;
 }
 
@@ -173,11 +197,11 @@ function CriartagSpanReceptor(texto) {
 
 //===============  ADICIONAR NOVO CONTATO =====================
 
-let btnAddContato =  document.getElementById("btn-adicionar");
-btnAddContato.addEventListener("click",function(){
+let btnAddContato = document.getElementById("btn-adicionar");
+btnAddContato.addEventListener("click", function () {
 
-    document.getElementById("ListaAmigos").setAttribute("style","display:none");
+    document.getElementById("ListaAmigos").setAttribute("style", "display:none");
     let painelTodosContatos = document.getElementById("todos-contatos");
-    painelTodosContatos.setAttribute("style","display:block");
-    
+    painelTodosContatos.setAttribute("style", "display:block");
+
 })

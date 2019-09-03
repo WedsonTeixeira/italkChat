@@ -119,30 +119,32 @@ function addFriend(codigo, usuario_id, amigo_id) {
 
 
 function addMsg(remetenteId, receptorId, mensagem, data) {
+    let dados;
     $.ajax({
         method: 'GET',
-        url: "http://chatjs.gitedu.com.br/mensagem//add-msg",
+        url: "http://chatjs.gitedu.com.br/mensagem/add-msg",
         data: {
             codigo: matricula_base,
             remetente_id: remetenteId,
             receptor_id: receptorId,
-      
+            mensagem: mensagem,
+            data: data,
 
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         crossDomain: true,
-
+        async:false,
         success: function (data) {
-           console.log("enviado")
+           dados = data;
         },
         error: function (resp) {
-            console.log("nao enviado")
-           
+            dados = data;
         }
     });
-
+    return dados;
 }
+
 
 function getMsgs(remetenteId, receptorId) {
     let dados;
