@@ -22,12 +22,12 @@ btnEntrar.addEventListener("click", function () {
         alert("Preencha o campo de senha!");
         return;
     }
-    let  auxPessoa = usuarioExiste(pessoa);
+    let auxPessoa = usuarioExiste(pessoa);
     if (auxPessoa) {
         pessoa = Object.create(Pessoa);
-        localStorage.setItem("italk-user",JSON.stringify(auxPessoa));
-      
-        location.href="home.html"
+        localStorage.setItem("italk-user", JSON.stringify(auxPessoa));
+
+        location.href = "home.html"
     } else {
         msgUsuarioInvalido();
     }
@@ -42,8 +42,8 @@ function dividirCampos(pessoa, session) {
 }
 
 function usuarioExiste(usuario) {
-  
-    for(let i=0;i<baseDadosUsuario.length;i++){
+
+    for (let i = 0; i < baseDadosUsuario.length; i++) {
         if (usuario.usuario == baseDadosUsuario[i].usuario && usuario.senha == baseDadosUsuario[i].senha)
             return baseDadosUsuario[i];
     }

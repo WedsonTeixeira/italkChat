@@ -32,7 +32,7 @@ function getUserByName(nome, dados) {
         }
     });
 }
-function getAllUser(dados){
+function getAllUser(dados) {
     $.ajax({
         url: "http://chatjs.gitedu.com.br/usuario/get-all-users?callback=",
         method: "GET",
@@ -88,7 +88,7 @@ function getAllFriends(usuario_id, dados) {
         }
     });
 }
-function addMsg(remetenteId, receptorId, mensagem, data,dados) {
+function addMsg(remetenteId, receptorId, mensagem, data, dados) {
     $.ajax({
         url: "http://chatjs.gitedu.com.br/mensagem/add-msg?callback=",
         method: "GET",
@@ -148,7 +148,7 @@ function getMsgsFromRemetenteId(remetenteId, dados) {
 
 
 
-function addFriend(usuarioId, amigoId,dados) {
+function addFriend(usuarioId, amigoId, dados) {
     $.ajax({
         url: "http://chatjs.gitedu.com.br/usuario-amigo/add-friend?callback=",
         method: "GET",
@@ -157,7 +157,7 @@ function addFriend(usuarioId, amigoId,dados) {
             codigo: matricula_base,
             usuario_id: usuarioId,
             amigo_id: amigoId,
- 
+
         },
         success: function (response, textStatus, jqXHR) {
             dados(response);
@@ -167,6 +167,6 @@ function addFriend(usuarioId, amigoId,dados) {
         }
     });
 }
-// ======================== FIM DA CONEXAO-API ============= 
+// ======================== FIM DA CONEXAO-API =============
 
 

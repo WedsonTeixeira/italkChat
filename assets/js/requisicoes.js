@@ -19,7 +19,16 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
         getMsgs(receptorId, remetenteId, function (dados2) {
             mensagensReceptor = dados2;
             let array_chat = [];
-            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
+                if (mensagensEmissor[1] == "Não existem mensagens") {
+                    array_chat = array_chat.concat(mensagensReceptor);
+                }
+                if (mensagensReceptor[1] == "Não existem mensagens") {
+                    array_chat = array_chat.concat(mensagensEmissor);
+                }
+            } else {
+                array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            }
             for (let i = 0; i < array_chat.length; i++) {
                 for (let j = i + 1; j < array_chat.length; j++) {
                     if (array_chat[i].id > array_chat[j].id) {

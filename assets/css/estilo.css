@@ -89,9 +89,11 @@ button {
 
 }
 #span-btn-enviar{
+    cursor: pointer;
     background-color: rgb(80, 88, 160)
 }
 #span-btn-enviar:hover{
+    cursor: pointer;
     background-color: rgb(26, 34, 104)
     
 }

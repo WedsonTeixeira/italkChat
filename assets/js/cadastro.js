@@ -2,9 +2,7 @@
 //======================= FUNCOES DA TELA CADASTRO ================ 
 //=================================================================
 
-
 let btncadastro = document.getElementById("btn-cadastrar");
-
 
 btncadastro.addEventListener("click", function () {
     let submit = true;
@@ -92,27 +90,25 @@ btncadastro.addEventListener("click", function () {
         }
         split = corigirdata.split('/');
         corigirdata = split[2] + "/" + split[1] + "/" + split[0];
-        console.log(corigirdata);
-
+        
         let verificar = addUser(nome.value, corigirdata, email.value, usuario.value, senha.value);
         if (verificar[0] == "Adicionado!") {
-            
+
             let aviso = document.getElementById("avisos");
             let divErro = createAvisosSuce("Usuario Cadastrado Com Sucesso", "userAdd");
             aviso.insertAdjacentElement("beforeEnd", divErro);
             submit = false;
         }
         let deletedivSucess = document.getElementById("userAdd");
-        if(deletedivSucess)
-        {
-            setTimeout(function(){ 
+        if (deletedivSucess) {
+            setTimeout(function () {
                 document.getElementsByName("CadastroUsuario")[0].submit();
-                deletedivSucess.parentNode.removeChild(deletedivSucess); 
-                location.href="index.html"
+                deletedivSucess.parentNode.removeChild(deletedivSucess);
+                location.href = "index.html"
             }, 4000);
-           
-        
-        }    
+
+
+        }
     }
 });
 

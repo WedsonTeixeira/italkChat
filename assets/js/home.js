@@ -9,13 +9,21 @@ let tamanhomensagem = 0;
 function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
     let mensagensEmissor;
     let mensagensReceptor;
-
     getMsgs(remetenteId, receptorId, function (dados1) {
         mensagensEmissor = dados1;
         getMsgs(receptorId, remetenteId, function (dados2) {
             mensagensReceptor = dados2;
             let array_chat = [];
-            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            if (mensagensEmissor[1] == "Não existem mensagens" || mensagensReceptor[1] == "Não existem mensagens") {
+                if (mensagensEmissor[1] == "Não existem mensagens") {
+                    array_chat = array_chat.concat(mensagensReceptor);
+                }
+                if (mensagensReceptor[1] == "Não existem mensagens") {
+                    array_chat = array_chat.concat(mensagensEmissor);
+                }
+            } else {
+                array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            }
             for (let i = 0; i < array_chat.length; i++) {
                 for (let j = i + 1; j < array_chat.length; j++) {
                     if (array_chat[i].id > array_chat[j].id) {
@@ -32,53 +40,64 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
 
 }
 
+function EnviarMensagem() {
+    let mensagem = document.getElementById("inputMensagem").value;
+    if (mensagem != "" && amigo != null) {
+        document.getElementById("inputMensagem").value = "";
+        var excluir = document.getElementById('Naoamensagens');
+        if (excluir) {
+            excluir.parentNode.removeChild(excluir);
+        }
+
+        let data = "02/09/2019";
+        carregar();
+        addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
+            carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
+                MensagemReceptor(dados[dados.length - 1].id, dados[dados.length - 1].mensagem)
+                ajustarAlturaChat();
+            });
+            destroiCarregar();
+
+        });
+    }
+}
 let painelMensagens = document.getElementById("conteudo-conversa");
 window.addEventListener('load', function () {
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
     carregar();
     getAllFriends(pessoa.id, function (dados) {
-        if(dados[1] == "Não encontrado")
-        {
+        if (dados[1] == "Não encontrado") {
             ArrayAmigos = new Array();
         }
-        else
-        {
+        else {
             ArrayAmigos = dados;
         }
         destroiCarregar();
         let had = document.getElementById("ListaAmigos");
         had.style.visibility = "visible";
+        for (let i = 0; i < ArrayAmigos.length; i++) {
+            for (let j = i + 1; j < ArrayAmigos.length; j++) {
+                if (ArrayAmigos[i].nome > ArrayAmigos[j].nome) {
+                    let aux = ArrayAmigos[i];
+                    ArrayAmigos[i] = ArrayAmigos[j];
+                    ArrayAmigos[j] = aux;
+                }
+            }
+        }
+
         CriarAmigos(ArrayAmigos, "ListaAmigos", "");
     });
     ajustarAlturaChat()
-       
+
 });
 
-function EnviarMensagem() {
-    let mensagem = document.getElementById("inputMensagem").value;
-    if (mensagem != "" && amigo != null) {
-        document.getElementById("inputMensagem").value = "";
-        let data = "02/09/2019";
-        carregar();
-        addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
-            carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
-                MensagemReceptor(dados[dados.length - 1].id,dados[dados.length - 1].mensagem)    
-                ajustarAlturaChat(); 
-            });
-            destroiCarregar();
-            
-        });
-    }
-    
-
-}
 
 function buscarMensagens(obj) {
     let id = quebrarId(obj);
     limpaPainelMensagem();
     amigo = id;
     carregaMensagens(pessoa.id, id);
-    
+
 }
 
 function quebrarId(obj) {
@@ -124,10 +143,10 @@ function carregaMensagens(remetenteId, receptorId) {
     let mensagensEmissor;
     let mensagensReceptor;
     carregar();
-    getMsgs(remetenteId, receptorId, function (dados) {
-        mensagensEmissor = dados;
-        getMsgs(receptorId, remetenteId, function (dados) {
-            mensagensReceptor = dados;
+    getMsgs(remetenteId, receptorId, function (dados1) {
+        mensagensEmissor = dados1;
+        getMsgs(receptorId, remetenteId, function (dados2) {
+            mensagensReceptor = dados2;
             let divMensagens;
             if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
                 //não há mensagens
@@ -174,9 +193,8 @@ function carregaMensagens(remetenteId, receptorId) {
             }
         });
     });
-    
-}
 
+}
 
 
 function limpaPainelMensagem() {
@@ -243,22 +261,12 @@ function CriartagSpanEmissor(texto) {
 function createDiv(texto, classe) {
     let div;
     div = document.createElement('div');
-    if (texto != "")
-        div.textContent = texto;
-    if (classe != "")
-        div.setAttribute('class', classe);
+    div.textContent = texto;
+    div.setAttribute('class', classe);
+    div.setAttribute('id', "Naoamensagens");
     return div;
 }
 
-function createSpan(texto, classe) {
-    let div;
-    div = document.createElement('div');
-    if (texto != "")
-        div.textContent = texto;
-    if (classe != "")
-        div.setAttribute('class', classe);
-    return div;
-}
 
 //===============  ADICIONAR NOVO CONTATO =====================
 let painelAddContato = document.getElementById("painel-adicionar");
@@ -275,6 +283,15 @@ painelAddContato.addEventListener("click", function () {
         auxAmigos = ArrayAmigos.slice();
         auxAmigos.push(pessoa)
         verificarNaoAmigos(todosUsuarios, auxAmigos);
+        for (let i = 0; i < todosUsuarios.length; i++) {
+            for (let j = i + 1; j < todosUsuarios.length; j++) {
+                if (todosUsuarios[i].nome > todosUsuarios[j].nome) {
+                    let aux = todosUsuarios[i];
+                    todosUsuarios[i] = todosUsuarios[j];
+                    todosUsuarios[j] = aux;
+                }
+            }
+        }
         limpaPainelContatos("ListaAmigos");
         CriarAmigos(todosUsuarios, "ListaNovosContatos", "addNovoContato(this)")
     });
@@ -308,22 +325,17 @@ function addNovoContato(obj) {
         let idNovoContato = quebrarId(obj);
 
         carregar();
-        addFriend(pessoa.id,idNovoContato,function (dados) {
-            console.log(dados)  
-            addFriend(idNovoContato,pessoa.id,function (dados) {
-                console.log(dados)
+        addFriend(pessoa.id, idNovoContato, function (dados) {
+            addFriend(idNovoContato, pessoa.id, function (dados) {
                 destroiCarregar();
-                window.location.href="home.html";
-                
-            });  
-        }); 
+                window.location.href = "home.html";
+            });
+        });
 
     }
 }
 
-
-function ajustarAlturaChat(){
-    var alturaChat = document.getElementById("conteudo-conversa"); 
-    console.log(alturaChat.scrollHeight)
-    alturaChat.scrollTop=parseInt(alturaChat.scrollHeight)-50;
+function ajustarAlturaChat() {
+    var alturaChat = document.getElementById("conteudo-conversa");
+    alturaChat.scrollTop = parseInt(alturaChat.scrollHeight) - 50;
 }

@@ -1,12 +1,7 @@
 		TAREFAS
-
--> Pesquisar amigos
--> Adicionar amigos
--> Enviar/receber mensagem
-
+-> Teste Para Encontrar Erros
 
 		EM ANDAMENTO
-
 Luiz  : 
 wedson: 
 
@@ -16,3 +11,5 @@ wedson:
  -> Cadastro de usuario
  -> pegar todos os amigos
  -> Listar amigos
+ -> Adicionar amigos
+ -> Enviar/receber mensagem
