@@ -6,6 +6,10 @@ let todosUsuarios = new Array();
 let ArrayAmigos;
 let tamanhomensagem = 0;
 
+let boasVindasUsuario = document.getElementById("nome-usuario");
+let inputMsg = document.getElementById("inputMensagem");
+let painelMensagens = document.getElementById("conteudo-conversa");
+
 function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
     let mensagensEmissor;
     let mensagensReceptor;
@@ -40,6 +44,10 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
 
 }
 
+inputMsg.addEventListener("keypress",function(evt){
+    if(evt.keyCode == 13 )
+        EnviarMensagem();
+})
 function EnviarMensagem() {
     let mensagem = document.getElementById("inputMensagem").value;
     if (mensagem != "" && amigo != null) {
@@ -48,7 +56,6 @@ function EnviarMensagem() {
         if (excluir) {
             excluir.parentNode.removeChild(excluir);
         }
-
         let data = "02/09/2019";
         carregar();
         addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
@@ -57,13 +64,17 @@ function EnviarMensagem() {
                 ajustarAlturaChat();
             });
             destroiCarregar();
-
         });
     }
 }
-let painelMensagens = document.getElementById("conteudo-conversa");
+
 window.addEventListener('load', function () {
+    let inputMsg = document.getElementById("inputMensagem");
+    inputMsg.setAttribute("readonly","disabled");
+    inputMsg.nextElementSibling.setAttribute("id","none")
+
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
+    boasVindasUsuario.textContent+= pessoa.nome;
     carregar();
     getAllFriends(pessoa.id, function (dados) {
         if (dados[1] == "Não encontrado") {
@@ -140,6 +151,13 @@ function CriarTagaAmigos(texto) {
 }
 
 function carregaMensagens(remetenteId, receptorId) {
+
+
+
+    let inputMsg = document.getElementById("inputMensagem");
+    inputMsg.removeAttribute("readonly")
+    inputMsg.nextElementSibling.setAttribute("id","span-btn-enviar")
+
     let mensagensEmissor;
     let mensagensReceptor;
     carregar();
@@ -150,7 +168,7 @@ function carregaMensagens(remetenteId, receptorId) {
             let divMensagens;
             if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
                 //não há mensagens
-                divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro");
+                divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro","Naoamensagens");
                 limpaPainelMensagem();
                 painelMensagens.insertAdjacentElement("afterbegin", divMensagens);
                 destroiCarregar()
@@ -258,12 +276,13 @@ function CriartagSpanEmissor(texto) {
     return span;
 }
 
-function createDiv(texto, classe) {
+function createDiv(texto, classe,id) {
     let div;
     div = document.createElement('div');
     div.textContent = texto;
     div.setAttribute('class', classe);
-    div.setAttribute('id', "Naoamensagens");
+    if(id!="")
+        div.setAttribute('id', id);
     return div;
 }
 
@@ -271,6 +290,7 @@ function createDiv(texto, classe) {
 //===============  ADICIONAR NOVO CONTATO =====================
 let painelAddContato = document.getElementById("painel-adicionar");
 painelAddContato.addEventListener("click", function () {
+
     let painelTodosContatos = document.getElementById("ListaNovosContatos");
     if (painelTodosContatos.style.visibility == "visible")
         return;
@@ -320,22 +340,38 @@ painelListaAmigos.addEventListener("click", function () {
 });
 
 function addNovoContato(obj) {
-    let add = confirm("Deseja Adicionar " + obj.firstChild.textContent + " a sua lista de contatos?");
-    if (add) {
-        let idNovoContato = quebrarId(obj);
-
-        carregar();
-        addFriend(pessoa.id, idNovoContato, function (dados) {
-            addFriend(idNovoContato, pessoa.id, function (dados) {
-                destroiCarregar();
-                window.location.href = "home.html";
+    painelNovoContato(obj.firstChild.textContent);
+    addAmigo(function(resp){
+        if(resp){
+            let idNovoContato = quebrarId(obj);
+            carregar();
+            addFriend(pessoa.id, idNovoContato, function (dados) {
+                addFriend(idNovoContato, pessoa.id, function (dados) {
+                    destroiCarregar();
+                    window.location.href = "home.html";
+                });
             });
-        });
+        }else{
+            destroiCarregar();
+        }
+        
+    });
 
-    }
 }
 
 function ajustarAlturaChat() {
     var alturaChat = document.getElementById("conteudo-conversa");
     alturaChat.scrollTop = parseInt(alturaChat.scrollHeight) - 50;
+}
+
+function addAmigo(resp){
+
+    let btnOk =  document.getElementById("btnAddAmizade");
+    let btnCancelar =  document.getElementById("btnCancelarAmizade");
+    btnOk.addEventListener("click",function(){
+        resp (true)
+    });
+    btnCancelar.addEventListener("click",function(){
+        resp (false) 
+    });
 }

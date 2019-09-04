@@ -28,10 +28,10 @@
     </header>
     <main class="container-fluid">
         <div class="row">
-            <div class="col-sm-8">
-                <div id="tela-login">
+            <div class="col-sm-8 ">
+                <div id="tela-login" class="">
                     <div id="head-login">
-                        <p id="logo-login">iTALK</p>
+                        <p id="titulo-tela-login">iTALK</p>
                         <span id="subtitulo-login">Entre com sua conta</span>
                     </div>
                     <form>
@@ -42,7 +42,7 @@
                                         <i class="icons font-2xl cui-user"></i>
                                     </span>
                                 </div>
-                                <input id="nome" class="form-control" type="text" placeholder="Nome do usuário">
+                                <input id="nome" class="form-control" type="text" placeholder="Nome do usuário" req>
                             </div>
                             <div>
                                 <div class="input-group mb-3">
@@ -62,7 +62,8 @@
                             <button class="btn-success" id="btn-entrar">Entrar</button>
                         </div>
                         <div class="div-footer">
-                            <span id="link-cadastro"><a href="cadastro.html">Novo no ITalk? Clique aqui para
+                            <span id="link-cadastro">
+                                <a href="cadastro.html">Novo no ITalk? Clique aqui para
                                     cadastrar</a></span>
                         </div>
                     </div>
@@ -70,16 +71,19 @@
             </div>
         </div>
     </main>
-    <footer>
-        <h2>AREA DE TESTE</h2>
-        <form action="http://chatjs.gitedu.com.br/usuario/get-all-users?">
-            <input type="text" name="codigo" placeholder="codigo">
-            <input type="submit" value="Buscar">
-        </form>
-        <div id="res">
 
-
-        </div>
+    <footer class="container-fluid">
+        <div class="row centro" >
+            <div class="apresentacao-footer col-md-4">
+                <span>Luiz Carlos Moitinho</span>
+                <span>GitHub: <a href="https://github.com/luizmoitinho" target="_blank" >luizMoitinho</a></span>
+                <span class="ufs">Universidade Federal de Sergipe</span>
+            </div>
+            <div class="apresentacao-footer col-md-4">
+                    <span>Wedson Texeira de Almeida</span>
+                    <span>GitHub: <a href="https://github.com/WedsonTeixeira" target="_blank">WedsonTexeira</a></span>
+                    <span class="ufs">Universidade Federal de Sergipe</span>
+                </div>
     </footer>
     <script src="../assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="../assets/js/Library.js" type="text/javascript"></script>

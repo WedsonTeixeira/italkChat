@@ -3,12 +3,10 @@
 //=================================================================
 let btnEntrar = document.getElementById("btn-entrar");
 let pessoa;
-
 /*
  * Carrega todos os usuario para o programa visto que é unica forma segura, diantes dos metodos acessores
  * da api, de se identificar um usuario que poderá vir a logar no sistema.
  */
-
 btnEntrar.addEventListener("click", function () {
     //================================================
     let pessoa = Object.create(Pessoa);

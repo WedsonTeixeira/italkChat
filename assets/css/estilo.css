@@ -1,6 +1,21 @@
+/* ===================== FORMATACAO GLOBAL ============================*/
 * {
     padding: 0px;
     margin: 0px;
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dad7d7;
 }
 
 #cabecalho {
@@ -15,6 +30,132 @@ body {
     color: #000
 }
 
+button {
+    border: none;
+}
+
+input {
+    border: none,  !important;
+    width: 315px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 2px 2px 2px;
+    font-size: 20px;
+    outline: 0,  !important;
+}
+
+input:focus {
+    border: 1px solid rgb(49, 14, 87);
+    box-shadow: 1px 1px 5px #000;
+}
+
+
+input::placeholder {
+    color: rgb(49, 14, 87);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+}
+
+footer {
+    float: left;
+    position: relative;
+    background: rgb(204, 210, 211);
+    margin-top: 50px;
+    padding: 2%;
+    width: 100%;
+    height: 120px;
+    color: rgb(9, 7, 100);
+    text-align: center
+}
+
+/* ===================== ICONE DE CARREGAR  ==============================*/
+.espera-usuario {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .8);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.icon-load {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(56, 65, 153);
+    border: 8px dotted rgba(58, 56, 56, 0.1);
+    border-left-color: rgb(255, 255, 255);
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+#painel-add-contato{
+    padding: 2%;
+    width: 400px;
+    height: 200px;
+    border-radius: 4px;
+    background-color: rgb(93, 99, 170);
+    border: 1px solid rgba(58, 56, 56, 0.1);
+    margin: auto;
+    font-size: 22px;
+    color:#fff;
+    font-weight:600;
+}
+
+
+
+
+/* ===================== BUTTONS  ==============================*/
+#BotaoEnviar {
+    cursor: pointer;
+    color: #fff;
+
+}
+
+.btn-success {
+    padding: 9px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 3px 3px 3px;
+    position: relative;
+    float: left;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+#btn-sair {
+    color: #fff;
+    cursor: pointer;
+}
+
+#btn-sair span {
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+#btn-cadastrar {
+    margin-top: 20px;
+}
+
+/* ===================== IDs  ==============================*/
+.linha{
+    border-bottom:2px solid rgb(79, 79, 92);
+    margin:4% 0% 2% 0%;
+}
 #logo {
     margin-left: 100px;
     font-size: 40px;
@@ -25,7 +166,7 @@ body {
 }
 
 #barra-navegacao {
-    margin-top: 20px;
+    margin-top: 10px;
     float: right;
     margin-right: 120px;
 
@@ -48,12 +189,11 @@ body {
 #tela-login {
     background: #fff;
     padding: 5px 45px 35px 45px;
-    float: right;
     margin-top: 50px;
     opacity: 0.9;
+    float: right;
 }
-
-#logo-login {
+#titulo-tela-login {
     margin: 0;
     width: 100%;
     display: flex;
@@ -64,6 +204,19 @@ body {
     display: inline-block;
     font-stretch: normal;
     cursor: pointer;
+}
+#tela-login input {
+    border: none,  !important;
+    width: 315px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 2px 2px 2px;
+    font-size: 20px;
+    outline: 0,  !important;
+}
+#inputMensagem {
+    display: inline;
 }
 
 #subtitulo-login {
@@ -82,166 +235,70 @@ body {
     text-decoration: none
 }
 
-
-
-button {
-    border: none;
-
-}
-#span-btn-enviar{
-    cursor: pointer;
-    background-color: rgb(80, 88, 160)
-}
-#span-btn-enviar:hover{
-    cursor: pointer;
-    background-color: rgb(26, 34, 104)
-    
-}
-#BotaoEnviar{
-    cursor: pointer;
-    color:#fff;
-
-}
-
-.btn-success {
-    padding: 9px;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 3px 3px 3px;
-    position: relative;
-    float: left;
-}
-
-#btn-sair {
-    color: #fff;
-    cursor: pointer;
-}
-
-#btn-sair span {
-    font-size: 17px;
-    margin-left: 10px;
-}
-
-#btn-cadastrar {
-    margin-top: 20px;
-}
-
 #footer-login {
     display: flex;
     flex-direction: column
 }
-
 #link-cadastro a {
     color: rgb(10, 12, 131);
     margin-top: 20px
 }
 
-#tela-login input {
-    border: none,  !important;
-    width: 315px;
-    height: 50px;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 2px 2px 2px;
-    font-size: 20px;
-    outline: 0,  !important;
+#span-btn-enviar {
+    cursor: pointer;
+    background-color: rgb(80, 88, 160)
 }
 
-.div-input {
-    border: 1px solid;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-input:focus {
-    border: 1px solid rgb(49, 14, 87);
-    box-shadow: 1px 1px 5px #000;
-}
-
-
-input::placeholder {
-    color: rgb(49, 14, 87);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 16px;
-}
-
-
-
-.aviso {
-    font-size: 14px;
-    display: block
-}
-
-
-/*===============  tela cadastro ==================*/
-.centro {
-    display: flex;
-    flex-direction: row;
-    justify-content: center
-}
-
-.tela-cadastro label {
-    display: flex;
-    flex-direction: row;
-    font-size: 15px;
-    margin-top: 15px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-.tela-cadastro {
-    margin-top: 1%;
-}
-
-input {
-    border: none,  !important;
-    width: 315px;
-    height: 50px;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 2px 2px 2px;
-    font-size: 20px;
-    outline: 0,  !important;
-}
-
-footer {
-    float: left;
-    position: relative;
-    background: rgb(102, 101, 102);
-    margin-top: 50px;
-    width: 100%;
-    height: 180px;
-    color: rgb(216, 213, 224);
-}
-
-footer div h4 {
-    font-size: 20px;
-    font-stretch: inherit;
-    font-weight: 7 00px;
-    padding: 15px
-}
-
-.avisos-error {
-    width: 970px;
-    margin-top: 1%;
-    background-color: red;
-    text-align: center;
-    color: white;
+#span-btn-enviar:hover {
+    cursor: pointer;
+    background-color: rgb(26, 34, 104)
 }
 
 #avisos {
     align-items: right;
 }
-
-.avisos-Sucess {
-    width: 970px;
-    margin-top: 1%;
-    background-color: green;
-    text-align: center;
-    color: white;
+#nome-usuario{
+    font-size: 22px;
+    font-weight: 300;
+    color:rgb(248, 244, 248);
+    background: rgb(148, 6, 136);
+    margin-bottom:4%;
+    padding:2px;
+    border-radius:3px;
+    
 }
 
-/*=====================  home  =================================*/
+#painel-contatos {
+    margin: 1%;
+}
+
+#lista-contatos {
+    background-color: rgb(243, 243, 243);
+    border-right: 2px solid #cccccc;
+    overflow: auto;
+    height: 500px;
+}
+
+#conversa {
+    background-color: rgb(243, 243, 243);
+    display: inline;
+}
+
+#conteudo-conversa {
+    background-color: rgb(182, 182, 206);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 390px;
+}
+
+
+#ListaNovosContatos {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
 
 #painel-contatos {
     margin: 1%;
@@ -268,17 +325,59 @@ footer div h4 {
     height: 390px;
 }
 
-::-webkit-scrollbar-track {
-    background-color: #F4F4F4;
+
+#ListaNovosContatos {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
 }
 
-::-webkit-scrollbar {
-    width: 6px;
-    background: #F4F4F4;
+
+/* ===================== CLASSES============================*/
+.centro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center
 }
 
-::-webkit-scrollbar-thumb {
-    background: #dad7d7;
+.div-input {
+    border: 1px solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.aviso {
+    font-size: 14px;
+    display: block
+}
+
+.tela-cadastro label {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    margin-top: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.tela-cadastro {
+    margin-top: 1%;
+}
+
+.avisos-error {
+    width: 970px;
+    margin-top: 1%;
+    background-color: red;
+    text-align: center;
+    color: white;
+}
+
+.avisos-Sucess {
+    width: 970px;
+    margin-top: 1%;
+    background-color: green;
+    text-align: center;
+    color: white;
 }
 
 .mensagem-dir {
@@ -314,46 +413,43 @@ footer div h4 {
     color: #fff;
 }
 
-
-.btn {
-    cursor: pointer;
+.apresentacao-projeto{
+    text-align:justify;
+    background-color:rgb(248, 250, 250);
+    padding: 4%;
+    color:rgb(88, 89, 99);
+    font-weight: 400;
+    transition: .2s;
+    font-size: 25px;
 }
-
-#ListaNovosContatos {
-    color: #000;
-    margin: 0;
-    padding: 0;
-    visibility: hidden;
+.apresentacao-footer{
+    background-color:rgb(248, 250, 250);
+    padding: 1%;
+    margin:1% 20px 2% 0px;
+    color:rgb(11, 28, 129);
+    font-weight: 400;
+    transition: .2s;
 }
-
-.espera-usuario {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: rgba(0, 0, 0, .8);
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.apresentacao-footer:hover{
+    -moz-transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+    z-index: 700px;
+    transition: all .2s;
+}
+.apresentacao-footer span{
+    font-size: 22px;
+    display: block;
+}
+.apresentacao-footer a{
+    color:rgb(173, 6, 159);
+}
+.apresentacao-footer a:hover{
+    color:rgb(148, 6, 136);
+    text-decoration:none
+}
+.ufs{
+    color:rgb(20, 6, 148);
+    font-weight: 700
+}
     
-}
-
-.icon-load{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color:rgb(56, 65, 153);;
-    border: 8px dotted rgba(58, 56, 56, 0.1);
-    border-left-color:rgb(255, 255, 255);
-    animation: spin 1s linear infinite;
-    margin:auto;
-}
-@keyframes spin{
-    to { transform: rotate(360deg); }
-}
-
-#inputMensagem{
-    display: inline;
-}

@@ -17,67 +17,70 @@
 
 <body id="corpo">
     <!-- barra de navegação -->
-    <header id="cabecalho">
+    <header id="cabecalho" class="navbar">
         <a href="index.html"> <span id="logo">iTALK</span></a>
         <nav id="barra-navegacao">
             <a class="link" href="index.html">INICIO</a></li>
             <a class="link" href="cadastro.html">CADASTRE-SE</a>
         </nav>
     </header>
-    <main class="col-md-12">
+    <main class="container-fluid">
         <div class="row centro">
             <div id="avisos">
 
             </div>
         </div>
-        <div class="row tela-cadastro ">
-            <div class="col-md-12">
+        <div class="row tela-cadastro centro">
+            <div class="row">
                 <div class="card" id="ui-view">
-                    <div>
-                        <div class="card-header">
+                    <div class="col-md-12">
+                        <div class="card-header col-md-12">
                             <i class="icon-note"></i>Formulário de Cadastro
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <form class="center form-group" name="CadastroUsuario">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <label for="nome">NOME</label>
-                                        <input type="text" id="nome" placeholder="Informe seu  Nome" autofocus>
-                                    </div>
-                                    <div>
-                                        <label for="email">EMAIL</label>
-                                        <input type="email" id="email" placeholder="Informe seu email">
-                                    </div>
-                                    <div>
-                                        <label for="senha">SENHA</label>
-                                        <input type="password" id="senha" placeholder="Informe sua Senha">
-                                    </div>
-                                    <div>
-                                        <label for="confirmasenha">SENHA</label>
-                                        <input type="password" id="confirmasenha"
-                                            placeholder="Informe sua Senha Novamente">
+                        <div class="card-body">
+                            <form class="center form-group" name="CadastroUsuario">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label for="nome">NOME</label>
+                                            <input type="text" id="nome" placeholder="Informe seu  Nome" autofocus>
+                                        </div>
+                                        <div>
+                                            <label for="email">EMAIL</label>
+                                            <input type="email" id="email" placeholder="Informe seu email">
+                                        </div>
+                                        <div>
+                                            <label for="data-nasc">Data de Nascimento</label>
+                                            <input type="date" id="data-nasc">
+                                        </div>
+
                                     </div>
 
-                                </div>
-                                <div class="col-md-8">
-                                    <div>
-                                        <label for="usuario">USUARIO</label>
-                                        <input type="text" id="usuario" placeholder="Informe seu Login">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label for="usuario">USUARIO</label>
+                                            <input type="text" id="usuario" placeholder="Informe seu Login">
+                                        </div>
+
+                                        <div>
+                                            <label for="senha">SENHA</label>
+                                            <input type="password" id="senha" placeholder="Informe sua Senha">
+                                        </div>
+                                        <div>
+                                            <label for="confirmasenha">SENHA</label>
+                                            <input type="password" id="confirmasenha"
+                                                placeholder="Informe sua Senha Novamente">
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <label for="data-nasc">Data de Nascimento</label>
-                                        <input type="date" id="data-nasc">
-                                    </div>
                                 </div>
-                            </div>
-                            <div id="btn-cadastrar" class="btn-success">Cadastrar</div>
-                        </form>
+                                <div id="btn-cadastrar" class="btn-success">Cadastrar</div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+
 
     </main>
 

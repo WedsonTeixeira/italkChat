@@ -45,7 +45,7 @@ btncadastro.addEventListener("click", function () {
     let auxpessoaemail = EmailExiste(pessoa1);
     if (nome.value == "" || email.value == "" || senha.value == "" || senha2.value == "" || usuario.nome == "" || data.value == "") {
         let aviso = document.getElementById("avisos");
-        let divErro = createAvisos("Preencha Todos Os Campos", "errorCampos");
+        let divErro = createAvisos("Preencha Todos Os Campos", "alert alert-danger", "errorCampos");
         aviso.insertAdjacentElement("beforeEnd", divErro);
         submit = false;
     }
@@ -54,7 +54,7 @@ btncadastro.addEventListener("click", function () {
         let aviso = document.getElementById("avisos");
         if (!document.getElementById("erroremail")) {
             email.setAttribute("style", "border-color:red");
-            let divErro = createAvisos("Email Já Existe", "erroremail");
+            let divErro = createAvisos("Email Já Existe", "alert alert-danger", "erroremail");
             aviso.insertAdjacentElement("beforeEnd", divErro);
         }
         submit = false;
@@ -66,7 +66,7 @@ btncadastro.addEventListener("click", function () {
         if (!document.getElementById("errorSenha")) {
             senha.setAttribute("style", "border-color:red");
             senha2.setAttribute("style", "border-color:red");
-            let divErro = createAvisos("As Senhas Não Coincidem", "errorSenha");
+            let divErro = createAvisos("As Senhas Não Coincidem", "alert alert-danger", "errorSenha");
             aviso.insertAdjacentElement("beforeEnd", divErro);
         }
         submit = false;
@@ -76,12 +76,11 @@ btncadastro.addEventListener("click", function () {
         let aviso = document.getElementById("avisos");
         if (!document.getElementById("errorUsuario")) {
             usuario.setAttribute("style", "border-color:red");
-            let divErro = createAvisos("Usuario ja Existe", "errorUsuario");
+            let divErro = createAvisos("Usuario ja Existe", "alert alert-danger", "errorUsuario");
             aviso.insertAdjacentElement("beforeEnd", divErro);
         }
         submit = false;
     }
-
 
     if (submit) {
         let corigirdata = data.value;
@@ -90,41 +89,45 @@ btncadastro.addEventListener("click", function () {
         }
         split = corigirdata.split('/');
         corigirdata = split[2] + "/" + split[1] + "/" + split[0];
-        
-        let verificar = addUser(nome.value, corigirdata, email.value, usuario.value, senha.value);
-        if (verificar[0] == "Adicionado!") {
 
-            let aviso = document.getElementById("avisos");
-            let divErro = createAvisosSuce("Usuario Cadastrado Com Sucesso", "userAdd");
-            aviso.insertAdjacentElement("beforeEnd", divErro);
-            submit = false;
-        }
-        let deletedivSucess = document.getElementById("userAdd");
-        if (deletedivSucess) {
-            setTimeout(function () {
-                document.getElementsByName("CadastroUsuario")[0].submit();
-                deletedivSucess.parentNode.removeChild(deletedivSucess);
-                location.href = "index.html"
-            }, 4000);
+        let verificar;
 
+        addUser(nome.value, corigirdata, email.value, usuario.value, senha.value, function (verificar) {
+            if (verificar[0] == "Adicionado!") {
 
-        }
+                let aviso = document.getElementById("avisos");
+                let divErro = createAvisosSucess("Usuario Cadastrado Com Sucesso", "alert alert-success", "userAdd");
+                aviso.insertAdjacentElement("beforeEnd", divErro);
+                submit = false;
+            }
+            let deletedivSucess = document.getElementById("userAdd");
+            if (deletedivSucess) {
+                setTimeout(function () {
+                    document.getElementsByName("CadastroUsuario")[0].submit();
+                    deletedivSucess.parentNode.removeChild(deletedivSucess);
+                    location.href = "index.html"
+                }, 4000);
+
+            }
+
+        });
     }
 });
 
-function createAvisos(texto, id) {
+function createAvisos(texto, classe, id) {
     var div = document.createElement('div');
     div.textContent = texto;
-    div.setAttribute('class', 'avisos-error');
-    div.setAttribute("style", "display: block");
+    div.setAttribute('class', classe + " centro");
+    div.setAttribute('style', "width:740px;margin:2%");
     div.setAttribute("id", id);
     return div;
 }
-function createAvisosSuce(texto, id) {
+
+function createAvisosSucess(texto, classe, id) {
     var div = document.createElement('div');
     div.textContent = texto;
-    div.setAttribute('class', 'avisos-Sucess');
-    div.setAttribute("style", "display: block");
+    div.setAttribute('class', classe + " centro");
+    div.setAttribute('style', "width:740px;margin:2%")
     div.setAttribute("id", id);
     return div;
 }
@@ -138,6 +141,7 @@ function usuarioExiste(usuario) {
 
     return false;
 }
+
 function EmailExiste(usuario) {
 
     for (let i = 0; i < baseDadosUsuario.length; i++) {
@@ -147,6 +151,7 @@ function EmailExiste(usuario) {
 
     return false;
 }
+
 function verificarDigitação(usuario) {
 
 
