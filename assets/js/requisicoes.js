@@ -2,8 +2,6 @@ setInterval(function () {
     if (amigo != null) {
         carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
             if (dados.length > tamanhomensagem && dados[dados.length - 1].remetente_id == amigo) {
-                console.log(dados[dados.length - 1].id);
-                console.log(dados[dados.length - 1].mensagem);
                 MensagemEmisor(dados[dados.length - 1].id, dados[dados.length - 1].mensagem);
                 tamanhomensagem = dados.length;
                 ajustarAlturaChat();

@@ -44,8 +44,8 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
 
 }
 
-inputMsg.addEventListener("keypress",function(evt){
-    if(evt.keyCode == 13 )
+inputMsg.addEventListener("keypress", function (evt) {
+    if (evt.keyCode == 13)
         EnviarMensagem();
 })
 function EnviarMensagem() {
@@ -70,11 +70,11 @@ function EnviarMensagem() {
 
 window.addEventListener('load', function () {
     let inputMsg = document.getElementById("inputMensagem");
-    inputMsg.setAttribute("readonly","disabled");
-    inputMsg.nextElementSibling.setAttribute("id","none")
+    inputMsg.setAttribute("readonly", "disabled");
+    inputMsg.nextElementSibling.setAttribute("id", "none")
 
     pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    boasVindasUsuario.textContent+= pessoa.nome;
+    boasVindasUsuario.textContent += pessoa.nome;
     carregar();
     getAllFriends(pessoa.id, function (dados) {
         if (dados[1] == "Não encontrado") {
@@ -156,7 +156,7 @@ function carregaMensagens(remetenteId, receptorId) {
 
     let inputMsg = document.getElementById("inputMensagem");
     inputMsg.removeAttribute("readonly")
-    inputMsg.nextElementSibling.setAttribute("id","span-btn-enviar")
+    inputMsg.nextElementSibling.setAttribute("id", "span-btn-enviar")
 
     let mensagensEmissor;
     let mensagensReceptor;
@@ -168,7 +168,7 @@ function carregaMensagens(remetenteId, receptorId) {
             let divMensagens;
             if (mensagensEmissor[0] == 0 && mensagensReceptor[0] == 0) {
                 //não há mensagens
-                divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro","Naoamensagens");
+                divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro", "Naoamensagens");
                 limpaPainelMensagem();
                 painelMensagens.insertAdjacentElement("afterbegin", divMensagens);
                 destroiCarregar()
@@ -276,12 +276,12 @@ function CriartagSpanEmissor(texto) {
     return span;
 }
 
-function createDiv(texto, classe,id) {
+function createDiv(texto, classe, id) {
     let div;
     div = document.createElement('div');
     div.textContent = texto;
     div.setAttribute('class', classe);
-    if(id!="")
+    if (id != "")
         div.setAttribute('id', id);
     return div;
 }
@@ -341,8 +341,8 @@ painelListaAmigos.addEventListener("click", function () {
 
 function addNovoContato(obj) {
     painelNovoContato(obj.firstChild.textContent);
-    addAmigo(function(resp){
-        if(resp){
+    addAmigo(function (resp) {
+        if (resp) {
             let idNovoContato = quebrarId(obj);
             carregar();
             addFriend(pessoa.id, idNovoContato, function (dados) {
@@ -351,10 +351,10 @@ function addNovoContato(obj) {
                     window.location.href = "home.html";
                 });
             });
-        }else{
+        } else {
             destroiCarregar();
         }
-        
+
     });
 
 }
@@ -364,14 +364,14 @@ function ajustarAlturaChat() {
     alturaChat.scrollTop = parseInt(alturaChat.scrollHeight) - 50;
 }
 
-function addAmigo(resp){
+function addAmigo(resp) {
 
-    let btnOk =  document.getElementById("btnAddAmizade");
-    let btnCancelar =  document.getElementById("btnCancelarAmizade");
-    btnOk.addEventListener("click",function(){
-        resp (true)
+    let btnOk = document.getElementById("btnAddAmizade");
+    let btnCancelar = document.getElementById("btnCancelarAmizade");
+    btnOk.addEventListener("click", function () {
+        resp(true)
     });
-    btnCancelar.addEventListener("click",function(){
-        resp (false) 
+    btnCancelar.addEventListener("click", function () {
+        resp(false)
     });
 }
