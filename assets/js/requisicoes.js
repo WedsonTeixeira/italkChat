@@ -2,8 +2,10 @@ setInterval(function () {
     if (amigo != null) {
         carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
             if (dados.length > tamanhomensagem && dados[dados.length - 1].remetente_id == amigo) {
-                limpaPainelMensagem();
-                carregaMensagens(pessoa.id, amigo);
+                console.log(dados[dados.length - 1].id);
+                console.log(dados[dados.length - 1].mensagem);
+                MensagemEmisor(dados[dados.length - 1].id, dados[dados.length - 1].mensagem);
+                tamanhomensagem = dados.length;
                 ajustarAlturaChat();
             }
 
@@ -35,12 +37,10 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
                         aux = array_chat[i];
                         array_chat[i] = array_chat[j];
                         array_chat[j] = aux;
-
                     }
                 }
             }
             dados(array_chat);
         });
     });
-
 }
