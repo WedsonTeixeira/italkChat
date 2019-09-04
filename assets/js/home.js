@@ -57,13 +57,15 @@ function EnviarMensagem() {
             excluir.parentNode.removeChild(excluir);
         }
         let data = "02/09/2019";
-        carregar();
+        let inputMsg = document.getElementById("inputMensagem");
+        inputMsg.setAttribute("readonly", "disabled");
         addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
+            let inputMsg = document.getElementById("inputMensagem");
+            inputMsg.removeAttribute("readonly")
             carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
                 MensagemReceptor(dados[dados.length - 1].id, dados[dados.length - 1].mensagem)
                 ajustarAlturaChat();
             });
-            destroiCarregar();
         });
     }
 }
