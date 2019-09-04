@@ -6,11 +6,47 @@ let todosUsuarios = new Array();
 let ArrayAmigos;
 let tamanhomensagem = 0;
 
+function carregaMensagensSemExibir(remetenteId, receptorId) {
+    let mensagensEmissor;
+    let mensagensReceptor;
+
+    getMsgs(remetenteId, receptorId, function (dados1) {
+        mensagensEmissor = dados1;
+        getMsgs(receptorId, remetenteId, function (dados2) {
+            mensagensReceptor = dados2;
+            let array_chat = new Array();
+            array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
+            return array_chat;
+        });
+    });
+}
+
+let painelMensagens = document.getElementById("conteudo-conversa");
+window.addEventListener('load', function () {
+    pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
+    carregar();
+    getAllFriends(pessoa.id, function (dados) {
+        if(dados[1] == "Não encontrado")
+        {
+            ArrayAmigos = new Array();
+        }
+        else
+        {
+            ArrayAmigos = dados;
+        }
+        destroiCarregar();
+        let had = document.getElementById("ListaAmigos");
+        had.style.visibility = "visible";
+        CriarAmigos(ArrayAmigos, "ListaAmigos", "");
+    });
+});
+
 function EnviarMensagem() {
     let mensagem = document.getElementById("inputMensagem").value;
     if (mensagem != "" && amigo != null) {
         document.getElementById("inputMensagem").value = "";
         let data = "02/09/2019";
+        let X;
         carregar();
         addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
             X = dados;
@@ -203,25 +239,6 @@ function createSpan(texto, classe) {
         div.setAttribute('class', classe);
     return div;
 }
-let painelMensagens = document.getElementById("conteudo-conversa");
-window.addEventListener('load', function () {
-    pessoa = JSON.parse(this.localStorage.getItem('italk-user'));
-    carregar();
-    getAllFriends(pessoa.id, function (dados) {
-        if(dados[1] == "Não encontrado")
-        {
-            ArrayAmigos = new Array();
-        }
-        else
-        {
-            ArrayAmigos = dados;
-        }
-        destroiCarregar();
-        let had = document.getElementById("ListaAmigos");
-        had.style.visibility = "visible";
-        CriarAmigos(ArrayAmigos, "ListaAmigos", "");
-    });
-});
 
 //===============  ADICIONAR NOVO CONTATO =====================
 let painelAddContato = document.getElementById("painel-adicionar");

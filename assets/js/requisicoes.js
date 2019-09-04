@@ -1,21 +1,12 @@
-setInterval(function(){
-    if(amigo != null)
-    {
-        let X;
-        carregaMensagensSemExibir(pessoa.id,amigo, function(dados)
-        {
-            if(dados > tamanhomensagem)
-            {
-                console.log("Mensagem");
+setInterval(function () {
+    if (amigo != null) {
+        carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
+            if (dados.length > tamanhomensagem && dados[dados.length - 1].remetente_id == amigo) {
                 limpaPainelMensagem();
-                carregaMensagens(pessoa.id,amigo);
+                carregaMensagens(pessoa.id, amigo);
             }
-            else
-            {
-                console.log("Sem Mensagem");
-            }
-             
-        }); 
+
+        });
     }
 }, 1000);
 
@@ -31,7 +22,17 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
             mensagensReceptor = dados2;
             let array_chat = [];
             array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
-            dados(array_chat.length);  
+            for (let i = 0; i < array_chat.length; i++) {
+                for (let j = i + 1; j < array_chat.length; j++) {
+                    if (array_chat[i].id > array_chat[j].id) {
+                        aux = array_chat[i];
+                        array_chat[i] = array_chat[j];
+                        array_chat[j] = aux;
+
+                    }
+                }
+            }
+            dados(array_chat);
         });
     });
 }
