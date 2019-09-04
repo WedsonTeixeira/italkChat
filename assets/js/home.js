@@ -6,7 +6,7 @@ let todosUsuarios = new Array();
 let ArrayAmigos;
 let tamanhomensagem = 0;
 
-function carregaMensagensSemExibir(remetenteId, receptorId) {
+function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
     let mensagensEmissor;
     let mensagensReceptor;
 
@@ -14,9 +14,19 @@ function carregaMensagensSemExibir(remetenteId, receptorId) {
         mensagensEmissor = dados1;
         getMsgs(receptorId, remetenteId, function (dados2) {
             mensagensReceptor = dados2;
-            let array_chat = new Array();
+            let array_chat = [];
             array_chat = array_chat.concat(mensagensEmissor, mensagensReceptor);
-            return array_chat;
+            for (let i = 0; i < array_chat.length; i++) {
+                for (let j = i + 1; j < array_chat.length; j++) {
+                    if (array_chat[i].id > array_chat[j].id) {
+                        aux = array_chat[i];
+                        array_chat[i] = array_chat[j];
+                        array_chat[j] = aux;
+
+                    }
+                }
+            }
+            dados(array_chat);
         });
     });
 }
@@ -46,12 +56,11 @@ function EnviarMensagem() {
     if (mensagem != "" && amigo != null) {
         document.getElementById("inputMensagem").value = "";
         let data = "02/09/2019";
-        let X;
         carregar();
         addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
-            X = dados;
-            limpaPainelMensagem();
-            carregaMensagens(pessoa.id, amigo);
+            carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
+                MensagemReceptor(dados[dados.length - 1].id,dados[dados.length - 1].mensagem)     
+            });
             destroiCarregar();
         });
     }
