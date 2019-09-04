@@ -71,7 +71,6 @@ function addUser(nome, data_nasc, email, usuario, senha, dados) {
         }
     });
 }
-
 function getAllFriends(usuario_id, dados) {
     $.ajax({
         url: "http://chatjs.gitedu.com.br/usuario-amigo/get-all-friends?callback=",
@@ -147,6 +146,27 @@ function getMsgsFromRemetenteId(remetenteId, dados) {
     });
 }
 
+
+
+function addFriend(usuarioId, amigoId,dados) {
+    $.ajax({
+        url: "http://chatjs.gitedu.com.br/usuario-amigo/add-friend?callback=",
+        method: "GET",
+        dataType: "jsonp",
+        data: {
+            codigo: matricula_base,
+            usuario_id: usuarioId,
+            amigo_id: amigoId,
+ 
+        },
+        success: function (response, textStatus, jqXHR) {
+            dados(response);
+        },
+        error: function (response, textStatus, jqXHR) {
+            console.log(jqXHR);
+        }
+    });
+}
 // ======================== FIM DA CONEXAO-API ============= 
 
 

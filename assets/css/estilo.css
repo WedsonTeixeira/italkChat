@@ -88,6 +88,18 @@ button {
     border: none;
 
 }
+#span-btn-enviar{
+    background-color: rgb(80, 88, 160)
+}
+#span-btn-enviar:hover{
+    background-color: rgb(26, 34, 104)
+    
+}
+#BotaoEnviar{
+    cursor: pointer;
+    color:#fff;
+
+}
 
 .btn-success {
     padding: 9px;
@@ -151,6 +163,8 @@ input::placeholder {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
 }
+
+
 
 .aviso {
     font-size: 14px;
@@ -336,4 +350,8 @@ footer div h4 {
 }
 @keyframes spin{
     to { transform: rotate(360deg); }
+}
+
+#inputMensagem{
+    display: inline;
 }

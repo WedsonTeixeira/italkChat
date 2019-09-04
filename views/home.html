@@ -47,10 +47,18 @@
                     <div id="conteudo-conversa">
 
                     </div>
-
-                    <input class="form-control" placeholder="Digite uma mensagem" id="inputMensagem" type="text">
-                    <button id="BotaoEnviar" onclick="EnviarMensagem();">Enviar Mensagem</button>
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group-prepend">
+                                <input class="form-control" placeholder="Digite uma mensagem" id="inputMensagem"
+                                    type="text">
+                                <span class="input-group-text" id="span-btn-enviar">
+                                    <i class="icon-paper-plane icons font-2xl" id="BotaoEnviar"
+                                        onclick="EnviarMensagem();"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +68,7 @@
     <script src="../assets/js/Library.js"></script>
     <script src="../assets/js/home.js"></script>
     <script src="../assets/js/requisicoes.js"></script>
-    
+
 </body>
 
 </html>

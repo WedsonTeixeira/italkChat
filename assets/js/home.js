@@ -29,6 +29,7 @@ function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
             dados(array_chat);
         });
     });
+
 }
 
 let painelMensagens = document.getElementById("conteudo-conversa");
@@ -49,6 +50,8 @@ window.addEventListener('load', function () {
         had.style.visibility = "visible";
         CriarAmigos(ArrayAmigos, "ListaAmigos", "");
     });
+    ajustarAlturaChat()
+       
 });
 
 function EnviarMensagem() {
@@ -59,11 +62,15 @@ function EnviarMensagem() {
         carregar();
         addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
             carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
-                MensagemReceptor(dados[dados.length - 1].id,dados[dados.length - 1].mensagem)     
+                MensagemReceptor(dados[dados.length - 1].id,dados[dados.length - 1].mensagem)    
+                ajustarAlturaChat(); 
             });
             destroiCarregar();
+            
         });
     }
+    
+
 }
 
 function buscarMensagens(obj) {
@@ -71,6 +78,7 @@ function buscarMensagens(obj) {
     limpaPainelMensagem();
     amigo = id;
     carregaMensagens(pessoa.id, id);
+    
 }
 
 function quebrarId(obj) {
@@ -126,6 +134,7 @@ function carregaMensagens(remetenteId, receptorId) {
                 divMensagens = createDiv("Não há mensagens a serem exibidas", "alert alert-danger centro");
                 limpaPainelMensagem();
                 painelMensagens.insertAdjacentElement("afterbegin", divMensagens);
+                destroiCarregar()
                 return false;
             } else {
 
@@ -161,9 +170,11 @@ function carregaMensagens(remetenteId, receptorId) {
                     }
                 }
                 destroiCarregar();
+                ajustarAlturaChat()
             }
         });
     });
+    
 }
 
 
@@ -288,9 +299,31 @@ painelListaAmigos.addEventListener("click", function () {
     listaAmigos.style = "visibility:visible";
     limpaPainelContatos("ListaNovosContatos");
     CriarAmigos(ArrayAmigos, "ListaAmigos", "");
-
+    ajustarAlturaChat()
 });
 
 function addNovoContato(obj) {
-    confirm("Deseja Adicionar " + obj.firstChild.textContent + " a sua lista de contatos?");
+    let add = confirm("Deseja Adicionar " + obj.firstChild.textContent + " a sua lista de contatos?");
+    if (add) {
+        let idNovoContato = quebrarId(obj);
+
+        carregar();
+        addFriend(pessoa.id,idNovoContato,function (dados) {
+            console.log(dados)  
+            addFriend(idNovoContato,pessoa.id,function (dados) {
+                console.log(dados)
+                destroiCarregar();
+                window.location.href="home.html";
+                
+            });  
+        }); 
+
+    }
+}
+
+
+function ajustarAlturaChat(){
+    var alturaChat = document.getElementById("conteudo-conversa"); 
+    console.log(alturaChat.scrollHeight)
+    alturaChat.scrollTop=parseInt(alturaChat.scrollHeight)-50;
 }
