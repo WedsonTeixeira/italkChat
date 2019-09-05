@@ -60,10 +60,15 @@ function EnviarMensagem() {
         if (excluir) {
             excluir.parentNode.removeChild(excluir);
         }
-        let data = "02/09/2019";
+        let data = new Date();
+        let dia     = data.getDate();
+        var mes     = data.getMonth();
+        let ano4    = data.getFullYear();
+        let str_data = dia + '/' + (mes+1) + '/' + ano4;
+
         let inputMsg = document.getElementById("inputMensagem");
         inputMsg.setAttribute("readonly", "disabled");
-        addMsg(pessoa.id, amigo, mensagem, data, function (dados) {
+        addMsg(pessoa.id, amigo, mensagem,  str_data, function (dados) {
             let inputMsg = document.getElementById("inputMensagem");
             inputMsg.removeAttribute("readonly")
             carregaMensagensSemExibir(pessoa.id, amigo, function (dados) {
