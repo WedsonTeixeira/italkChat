@@ -13,7 +13,6 @@ btnEntrar.addEventListener("click", function () {
     pessoa.usuario = document.getElementById("nome").value;
     pessoa.senha = document.getElementById("senha").value;
     if (pessoa.usuario == "") {
-        //usar erro criado pelo wedson
         alert("Preencha o campo do nome!");
         return;
     } else if (pessoa.senha == "") {

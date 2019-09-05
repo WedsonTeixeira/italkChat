@@ -335,6 +335,10 @@ footer {
 
 
 /* ===================== CLASSES============================*/
+.bg-rocho{
+    background: rgb(148, 6, 136);
+    color:#fff;
+}
 .centro {
     display: flex;
     flex-direction: row;

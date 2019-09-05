@@ -9,7 +9,11 @@ let tamanhomensagem = 0;
 let boasVindasUsuario = document.getElementById("nome-usuario");
 let inputMsg = document.getElementById("inputMensagem");
 let painelMensagens = document.getElementById("conteudo-conversa");
+let painelListaAmigos = document.getElementById("painel-meus-contatos");
+let painelAddContato = document.getElementById("painel-adicionar");
 
+
+painelListaAmigos.classList.toggle("bg-rocho");
 function carregaMensagensSemExibir(remetenteId, receptorId, dados) {
     let mensagensEmissor;
     let mensagensReceptor;
@@ -71,6 +75,7 @@ function EnviarMensagem() {
 }
 
 window.addEventListener('load', function () {
+    painelListaAmigos.classList.add("bg-rocho");
     let inputMsg = document.getElementById("inputMensagem");
     inputMsg.setAttribute("readonly", "disabled");
     inputMsg.nextElementSibling.setAttribute("id", "none")
@@ -106,11 +111,12 @@ window.addEventListener('load', function () {
 
 
 function buscarMensagens(obj) {
+    let tituloChat = document.getElementById("titulo-chat");
     let id = quebrarId(obj);
     limpaPainelMensagem();
     amigo = id;
+    tituloChat.textContent = "Conversa: "+buscarUsuario(id).nome;
     carregaMensagens(pessoa.id, id);
-
 }
 
 function quebrarId(obj) {
@@ -122,6 +128,16 @@ function quebrarId(obj) {
     }
     return id;
 }
+
+function buscarUsuario(id){
+    for (let elem of ArrayAmigos){
+        if(elem.id == id)
+            return elem;
+    }
+    return false;
+
+}
+
 
 function CriarAmigos(usuario, id, funcao) {
     for (let i = 0; i < usuario.length; i++) {
@@ -153,9 +169,6 @@ function CriarTagaAmigos(texto) {
 }
 
 function carregaMensagens(remetenteId, receptorId) {
-
-
-
     let inputMsg = document.getElementById("inputMensagem");
     inputMsg.removeAttribute("readonly")
     inputMsg.nextElementSibling.setAttribute("id", "span-btn-enviar")
@@ -290,15 +303,17 @@ function createDiv(texto, classe, id) {
 
 
 //===============  ADICIONAR NOVO CONTATO =====================
-let painelAddContato = document.getElementById("painel-adicionar");
-painelAddContato.addEventListener("click", function () {
 
+painelAddContato.addEventListener("click", function () {
     let painelTodosContatos = document.getElementById("ListaNovosContatos");
     if (painelTodosContatos.style.visibility == "visible")
         return;
-    document.getElementById("ListaAmigos").style = "visibility:hidden";
+        
+    let novoContato = document.getElementById("ListaAmigos");
+    novoContato.style = "visibility:hidden";
+    painelListaAmigos.classList.remove("bg-rocho");
+    painelAddContato.classList.add("bg-rocho");
     painelTodosContatos.style = "visibility:visible";
-
     getAllUser(function (dados) {
         let todosUsuarios = dados;
         let auxAmigos = new Array();
@@ -329,11 +344,13 @@ function verificarNaoAmigos(todosUsuarios, amigos) {
     }
 }
 
-let painelListaAmigos = document.getElementById("painel-meus-contatos");
+
 painelListaAmigos.addEventListener("click", function () {
     let listaAmigos = document.getElementById("ListaAmigos");
     if (listaAmigos.style.visibility == "visible")
         return;
+    painelListaAmigos.classList.add("bg-rocho");
+    painelAddContato.classList.remove("bg-rocho");
     document.getElementById("ListaNovosContatos").style = "visibility:hidden";
     listaAmigos.style = "visibility:visible";
     limpaPainelContatos("ListaNovosContatos");
@@ -367,7 +384,6 @@ function ajustarAlturaChat() {
 }
 
 function addAmigo(resp) {
-
     let btnOk = document.getElementById("btnAddAmizade");
     let btnCancelar = document.getElementById("btnCancelarAmizade");
     btnOk.addEventListener("click", function () {
